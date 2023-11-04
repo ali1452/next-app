@@ -1,9 +1,17 @@
-import Image from 'next/image'
+import MainLayout from '@/container/mainLayout'
+import { fetchAllUsers } from '@/services/userservices'
 
-export default function Home() {
+const getAllUser  =  async()=>{
+return await fetchAllUsers()
+
+}
+
+export default async function Home() {
+  const {data} = await getAllUser()
+  // console.log('wwww')
   return (
    <>
-   <h1>Hello Next  Project</h1>
+   <MainLayout data={data} />
    </>
   )
 }
