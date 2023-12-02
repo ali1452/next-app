@@ -4,6 +4,7 @@ import React from 'react'
 import  style from './mainLayout.module.scss'
 import { productData } from './productdata'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const MainLayout = ({data}:any) => {
  
@@ -23,7 +24,7 @@ const MainLayout = ({data}:any) => {
           const {url,name,price,sku} = item
           return(
             <div key={"product" + i} className={style.card}>
-            <img src={url} alt='Product Image' width='400px' height='500px' />
+            <Link href={`/products/${i+1}`}><img src={url} alt='Product Image' width='400px' height='500px' /></Link>
             <p className={style.product_name}>{name}</p>
             <p className={style.price}>Rs.{price}</p>
             <span className={style.sku}>

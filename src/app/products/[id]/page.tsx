@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import ProductDetailComp from '@/container/productDetailComp';
 
 const ProductDetail = ({params}:any) => {
-    
+    console.log({params})
   return (
-    <div>ProductDetail {params.id}</div>
+    <div>
+      <ProductDetailComp id={params.id} />
+    </div>
   )
 }
 
