@@ -5,4 +5,13 @@
     padding: 10px 10px;
     justify-content: space-between;
     font-size: 24px;
+
+    @media (max-width:767px) {
+        font-size: 14px;
+    }
+
+    .cart_icon{
+        cursor: pointer;
+        margin-right: 10px;
+    }
 }

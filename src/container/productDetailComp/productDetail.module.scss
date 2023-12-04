@@ -7,27 +7,52 @@
     margin-top: 1rem;
     border-radius: 5px;
 
+    @media (max-width:767px) {
+        max-width: 90%;
+    }
+
     .product_heading{
         font-size: 48px;
         text-align: center;
         font-weight: 600;
+
+        @media (max-width:767px) {
+            font-size: 24px;
+            
+        }
     }
 
     .product_card{
         max-width: 50%;
         margin: auto;
         margin-top: 20px  !important;
+
+        @media (max-width:767px) {
+            margin-top: 5px !important;
+        }
         .product_name{
             text-align: center;
             font-size: 24px;
             font-weight: 600;
             text-decoration: underline;
+
+            @media (max-width:767px) {
+                font-size: 14px;
+                
+            }
         }
         .img_container{
             display: flex;
             width: 30rem;
             height: auto;
             gap:10px;
+
+            @media (max-width:767px) {
+                width: 10rem;
+                display: block;
+                font-size: 12px;
+                
+            }
         }
     
         .size_container{
@@ -35,6 +60,10 @@
             p{
                 padding-inline-end: 4px;
                 text-transform: uppercase;
+
+                @media (max-width:767px) {
+                    font-size: 12px;
+                }
     
             }
     
@@ -52,6 +81,10 @@
         flex-direction: column;
         gap:10px;
 
+        @media (max-width:767px) {
+            width: auto;
+        }
+
 
         .add_cart_btn{
             cursor: pointer;
@@ -59,8 +92,12 @@
             background-color: #000;
             color: #fff;
             width: 330px;
-            // margin: auto;
             margin-top: 10px;
+            @media (max-width:767px) {
+                width: 175px;
+                padding: 5px 10px;
+                
+            }
         }
 
         .shop_btn{
@@ -70,8 +107,12 @@
             color: #000;
             border: 1px solid #000;
             width: 330px;
-            // margin: auto;
             margin-bottom: 10px;
+            @media (max-width:767px) {
+                width: 175px;
+                padding: 5px 10px;
+                
+            }
         }
     }
 
