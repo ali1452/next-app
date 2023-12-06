@@ -1,6 +1,9 @@
+import CreateIcon from '@mui/icons-material/Create';
+import DeleteIcon from '@mui/icons-material/Delete';
 import React from 'react'
 import { productData } from '../mainLayout/productdata'
 import style from './cart.module.scss'
+
 
 type Props = {}
 
@@ -38,12 +41,22 @@ const CartComp = (props: Props) => {
        <td className={style.qty}>1</td>
        <td className={style.sub_total}>{product.price}</td>
        </tr>
-      </tbody>
+       
+       </tbody>
+     
      </table>
-     {/* <div>
-        <p>Summary</p>
-     </div> */}
+     <div className={style.icons_btn}>
+       <p><CreateIcon /></p>
+       <p><DeleteIcon /></p>
+       </div>
+       <div className={style.discount_box}>
+      <p className={style.discount_heading}>Apply discount code</p>
+      <input className={style.code_input} type='text' value='WELCOME' />
+      <button className={style.code_btn}>Apply Discount</button>
      </div>
+     </div>
+    
+     
     </div>
   )
 }
