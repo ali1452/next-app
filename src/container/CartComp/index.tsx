@@ -11,8 +11,8 @@ const CartComp = (props: Props) => {
     const product = productData[0]
   return (
     <div className={style.cart_container} >
-        <p className={style.cart_heading}>Shopping Cart</p>
         <div className={style.detail_container}>
+          <p className={style.cart_heading}>Shopping Cart</p>
         <table>
          <thead>
          <tr style={{borderBottom:'1px solid #000', marginBottom:'10px'}}>
@@ -49,14 +49,32 @@ const CartComp = (props: Props) => {
        <p><CreateIcon /></p>
        <p><DeleteIcon /></p>
        </div>
+       <div className={style.share_box}>
+        <p className={style.share_btn}>share cart</p>
+        <p className={style.continue_btn}>continue Shopping</p>
+       </div>
        <div className={style.discount_box}>
       <p className={style.discount_heading}>Apply discount code</p>
-      <input className={style.code_input} type='text' value='WELCOME' />
+      <input className={style.code_input} type='text' placeholder='enter your promo code' />
       <button className={style.code_btn}>Apply Discount</button>
      </div>
      </div>
-    
-     
+    <div className={style.summary_box}>
+    <p className={style.summary_heading}>Summary</p>
+    <div className={style.flex_box}>
+      <p>subtotal</p>
+      <p>Rs.3000</p>
+    </div>
+    <div className={style.flex_box}>
+      <p>shipping (domestic - shipping)</p>
+      <p>Rs.100</p>
+    </div>
+    <div className={style.total_box}>
+      <p>Order Total</p>
+      <p>Rs.3100</p>
+    </div>
+    <p className={style.checkout_btn}>go to checkout</p>
+    </div>
     </div>
   )
 }
