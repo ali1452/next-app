@@ -6,6 +6,10 @@
         font-size: 36px;
         font-weight: 400;
         padding-inline: 20px;
+
+        @media (max-width:767px) {
+            font-size: 24px;
+        }
     }
 
     .detail_container{
@@ -19,7 +23,7 @@
         @media (max-width:767px) {
             width: auto;
             margin: 0px;
-            padding: 0px;
+            padding-inline: 10px;
         }
 
         th{
@@ -42,6 +46,12 @@
         .detail_box{
             margin: 0px 10px;
 
+            .select_input{
+                border: 1px solid #000 !important;
+                width: 12rem !important;
+                padding: 2px !important;
+            }
+
             
         }
     
@@ -59,6 +69,10 @@
             width: 100px;
             padding: 5px;
             margin-top: 10px;
+
+            @media (max-width:767px) {
+                width: auto;
+            }
         }
     }
 
@@ -94,7 +108,12 @@
     margin-top: 20px;
     border-top: 1px solid #000;
 
+    @media (max-width:767px) {
+        justify-content: center;
+    }
+
     .share_btn{
+        cursor: pointer;
         background-color: #000;
         color: #fff;
         font-weight: 600;
@@ -103,6 +122,7 @@
     }
 
     .continue_btn{
+        cursor: pointer;
         background-color: #000;
         color: #fff;
         font-weight: 600;

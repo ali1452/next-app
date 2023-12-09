@@ -7,7 +7,8 @@ export const productData =  [
         description:'men T-shirt for winter season',
         url:'black_basic_tee_mn-ts-bs-ws23-003_2_.webp',
         discount_price:'1250',
-        sku:['s','m','l']
+        sku:['s','m','l'],
+        qty:1
     },
     {
         name:'Black Basic Tee MN-TS-BS-WS23-003',
@@ -17,7 +18,8 @@ export const productData =  [
         description:'men T-shirt for winter season',
         url:'coffee_basic_tee_mn-ts-bs-ws23-004_2_.webp',
         discount_price:'1350',
-        sku:['s','m','l']
+        sku:['s','m','l'],
+        qty:1,
     },
     {
         name:' Coffee Basic Tee MN-TS-BS-WS23-004',
@@ -27,7 +29,8 @@ export const productData =  [
         description:'men T-shirt for winter season',
         url:'expresso_basic_tee_mn-ts-bs-ws23-006_1_.webp',
         discount_price:'1350',
-        sku:['m','l']
+        sku:['m','l'],
+        qty:1
     },
     {
         name:'Expresso Basic Tee MN-TS-BS-WS23-006',
@@ -37,7 +40,8 @@ export const productData =  [
         description:'men T-shirt for winter season',
         url:'latte_basic_tee_mn-ts-bs-ws23-007_2_.webp',
         discount_price:'1350',
-        sku:['s','m','l']
+        sku:['s','m','l'],
+        qty:1
     },
     {
         name:'Latte Basic Tee MN-TS-BS-WS23-007',
@@ -47,7 +51,8 @@ export const productData =  [
         description:'men T-shirt for winter season',
         url:'off-white_basic_tee_mn-ts-bs-ws23-001_2_.webp',
         discount_price:'1250',
-        sku:['s','m','l']
+        sku:['s','m','l'],
+        qty:1
     },
     {
         name:'Off-White Basic Tee MN-TS-BS-WS23-001',
@@ -57,7 +62,8 @@ export const productData =  [
         description:'men T-shirt for winter season',
         url:'black_basic_tee_mn-ts-bs-ws23-003_2_.webp',
         discount_price:'1250',
-        sku:['s','m','l']
+        sku:['s','m','l'],
+        qty:1
     },
     {
         name:'Black Basic Tee MN-TS-BS-WS23-003',
@@ -67,7 +73,8 @@ export const productData =  [
         description:'men T-shirt for winter season',
         url:'coffee_basic_tee_mn-ts-bs-ws23-004_2_.webp',
         discount_price:'1350',
-        sku:['s','m','l']
+        sku:['s','m','l'],
+        qty:1
     },
     {
         name:' Coffee Basic Tee MN-TS-BS-WS23-004',
@@ -77,7 +84,8 @@ export const productData =  [
         description:'men T-shirt for winter season',
         url:'expresso_basic_tee_mn-ts-bs-ws23-006_1_.webp',
         discount_price:'1350',
-        sku:['m','l']
+        sku:['m','l'],
+        qty:1
     },
     {
         name:'Expresso Basic Tee MN-TS-BS-WS23-006',
@@ -87,7 +95,8 @@ export const productData =  [
         description:'men T-shirt for winter season',
         url:'latte_basic_tee_mn-ts-bs-ws23-007_2_.webp',
         discount_price:'1350',
-        sku:['s','m','l']
+        sku:['s','m','l'],
+        qty:1
     },
     {
         name:'Latte Basic Tee MN-TS-BS-WS23-007',
@@ -97,7 +106,8 @@ export const productData =  [
         description:'men T-shirt for winter season',
         url:'off-white_basic_tee_mn-ts-bs-ws23-001_2_.webp',
         discount_price:'1250',
-        sku:['s','m','l']
+        sku:['s','m','l'],
+        qty:1
     },
 
 ]
