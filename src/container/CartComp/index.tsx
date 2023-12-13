@@ -6,36 +6,45 @@ import { productData } from '../mainLayout/productdata'
 import style from './cart.module.scss'
 import { useRouter } from 'next/navigation';
 import DeleteModal from './deleteModal/deleteModal';
+import { cartData } from './cartData'
 
 
 type Props = {}
 
 const CartComp = (props: Props) => {
   const [edit,setEdit] = useState<boolean>(false)
-  const [product,setProduct] = useState({})
+  const [product,setProduct] = useState<any[]>([])
   const [discountCode, setDiscountCode] = useState<string>('')
   const [applyCode, setApplyCode] = useState<boolean>(false)
   const [codeAmt, setCodeAmt] = useState<number>(0)
   const [errMsg, setErrMsg] = useState('')
   const [modal,setModal] = useState<boolean>(false)
   const route = useRouter()
+  
     useEffect(()=>{
-      setProduct(productData[0])
+      setProduct(cartData)
 
     },[])
 
-    const changeQty=(e: string)=>{
-      const temp_element = {...product}
+    const changeQty=(e: string, index:number)=>{
+      const temp_element = [...product]
       if(+e >= 0 && +e <= 5 ){
-        temp_element.qty = +e
+        temp_element[index].qty = +e
         setProduct(temp_element)
       }
+    }
+
+    const subTotalAmt = ()=>{
+      let amount = 0
+      cartData.forEach(item=>amount += +item.price*item.qty)
+      return  amount
+
     }
 
     const applyDiscount=()=>{
       if(discountCode === "welcome"){
         setApplyCode(true)
-        setCodeAmt(100)
+        setCodeAmt(200)
       }else{
         setErrMsg('This code is invalid!')
         setTimeout(()=>{
@@ -44,9 +53,21 @@ const CartComp = (props: Props) => {
       }
 
     }
+    const editItems =(index:number)=>{
+      const  tempData = [...cartData]
+      tempData[index].edit = true
+      setProduct(tempData)
+
+    }
+
+    const saveItems =(index:number)=>{
+      const  tempData = [...cartData]
+      tempData[index].edit = false
+      setProduct(tempData)
+    }
   return (
     <div className={style.cart_container} >
-      {product.name !== undefined  ?
+      {product.length > 0  ?
       <>
       <div className={style.detail_container}>
         <p className={style.cart_heading}>Shopping Cart</p>
@@ -60,36 +81,41 @@ const CartComp = (props: Props) => {
        </tr>
        </thead>
      <tbody>
-     <tr>
+      {product.map((item, index)=>{
+        return (
+<tr>
      <td className={style.item_container}>
       <div>
-      <p style={{width:'120px'}}><img src={product.url} /></p>
+      <p style={{width:'120px'}}><img src={item.url} /></p>
       </div>
       <div className={style.detail_box}>
-      <p className={style.bold_text}>{product.name}</p>
-      {!edit ?<p><span className={style.bold_text}>Size:</span> Meduim</p>:
+      <p className={style.bold_text}>{item.name}</p>
+      {!item.edit ?<p><span className={style.bold_text}>Size:</span>{item.sku}</p>:
       <p>
-         <select className={style.select_input} name="size" id="size">
+         <select className={style.select_input}  name="size" id="size">
           <option value="small">small</option>
           <option value="medium">medium</option>
           <option value="large">large</option>
          </select>
         </p>}
-      {!edit ? <p><span className={style.bold_text}>quantity:</span> 1</p>:
+      {!item.edit ? <p><span className={style.bold_text}>quantity:</span>{item.qty}</p>:
       <>
       <label>QTY</label>
-      <p><input className={style.select_input} value={product.qty}  type="number" onChange={(e)=>changeQty(e.target.value)}  /></p>
+      <p><input className={style.select_input} value={item.qty}  type="number" onChange={(e)=>changeQty(e.target.value,  index)}  /></p>
       </>}
-      {!edit && <p onClick={()=>{setEdit(true)}} className={style.edit_btn}>edit</p>}
-      {edit && <p onClick={()=>{setEdit(false)}} className={style.edit_btn}>Save</p>}
+      {!item.edit && <p onClick={()=>editItems(index)} className={style.edit_btn}>edit</p>}
+      {item.edit && <p onClick={()=>{saveItems(index)}} className={style.edit_btn}>Save</p>}
       </div>
       </td>
      <td className={style.price}>
-      <span>{product.price}</span>
+      <span>{item.price}</span>
       </td>
-     <td className={style.qty}>{product.qty}</td>
-     <td className={style.sub_total}>{product.price*product.qty}</td>
+     <td className={style.qty}>{item.qty}</td>
+     <td className={style.sub_total}>{item.price*item.qty}</td>
      </tr>
+        )
+      })}
+     
      </tbody>
    </table>
    <div className={style.icons_btn}>
@@ -111,7 +137,7 @@ const CartComp = (props: Props) => {
   <p className={style.summary_heading}>Summary</p>
   <div className={style.flex_box}>
     <p>subtotal</p>
-    <p>Rs.{product.price * product.qty}</p>
+    <p>Rs.{subTotalAmt()}</p>
   </div>
   <div className={style.flex_box}>
     <p>shipping (domestic - shipping)</p>
@@ -123,7 +149,7 @@ const CartComp = (props: Props) => {
   </div>:''}
   <div className={style.total_box}>
     <p>Order Total</p>
-    <p>Rs.{product.price * product.qty + 100 - codeAmt}</p>
+    <p>{subTotalAmt() !==0?<>Rs.{subTotalAmt() - codeAmt +  100}</>:0.00}</p>
   </div>
   <p className={style.checkout_btn}>go to checkout</p>
   </div>
