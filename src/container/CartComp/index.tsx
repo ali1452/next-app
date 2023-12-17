@@ -83,7 +83,7 @@ const CartComp = (props: Props) => {
      <tbody>
       {product.map((item, index)=>{
         return (
-<tr>
+<tr  key={index+1}>
      <td className={style.item_container}>
       <div>
       <p style={{width:'120px'}}><img src={item.url} /></p>
