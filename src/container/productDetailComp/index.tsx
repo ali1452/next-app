@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { productData } from '../mainLayout/productdata'
 import style from './productDetail.module.scss'
+import Link from 'next/link'
 
 type Props = {
   id:string,
@@ -41,7 +42,7 @@ const ProductDetail = ({id}: Props) => {
       </div>
       </span>
       <div className={style.btn_container}>
-      <p className={style.add_cart_btn}>Add to Cart</p>
+      <Link href='/cart'><p className={style.add_cart_btn}>Add to Cart</p></Link>
       <p  className={style.shop_btn}>Shop Now</p>
       </div>
       </div>

@@ -28,7 +28,7 @@ const CartComp = (props: Props) => {
 
     const changeQty=(e: string, index:number)=>{
       const temp_element = [...product]
-      if(+e >= 0 && +e <= 5 ){
+      if(+e >0 && +e <= 5 ){
         temp_element[index].qty = +e
         setProduct(temp_element)
       }
