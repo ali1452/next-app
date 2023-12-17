@@ -29,7 +29,7 @@ const ProductDetail = ({id}: Props) => {
       <div>
       <div  className={style.size_container}>
       Size:  
-      {seletedProduct.sku?.map((size)=>{
+      {seletedProduct.sku?.map((size:string)=>{
         return(
           <p key={size}>{size}</p>
         )

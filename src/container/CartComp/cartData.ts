@@ -8,7 +8,8 @@ export const cartData =[
         url:'black_basic_tee_mn-ts-bs-ws23-003_2_.webp',
         discount_price:'1250',
         sku:'small',
-        qty:1
+        qty:1,
+        edit:false
     },
     {
         name:'Black Basic Tee MN-TS-BS-WS23-003',
@@ -20,6 +21,7 @@ export const cartData =[
         discount_price:'1350',
         sku:'medium',
         qty:1,
+        edit:false
     },
     {
         name:' Coffee Basic Tee MN-TS-BS-WS23-004',
@@ -30,6 +32,7 @@ export const cartData =[
         url:'expresso_basic_tee_mn-ts-bs-ws23-006_1_.webp',
         discount_price:'1350',
         sku:'medium',
-        qty:1
+        qty:1,
+        edit:false
     },
 ]

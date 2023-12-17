@@ -11,9 +11,24 @@ import { cartData } from './cartData'
 
 type Props = {}
 
+type cartDayaType ={
+  name: string;
+  price: string; 
+  category: string; 
+  brand: string; 
+  description: string; 
+  url: string; 
+  discount_price: string; 
+  sku: string; 
+  qty: number;
+  edit?:boolean
+
+
+}
+
 const CartComp = (props: Props) => {
   const [edit,setEdit] = useState<boolean>(false)
-  const [product,setProduct] = useState<any[]>([])
+  const [product,setProduct] = useState<cartDayaType[]>([])
   const [discountCode, setDiscountCode] = useState<string>('')
   const [applyCode, setApplyCode] = useState<boolean>(false)
   const [codeAmt, setCodeAmt] = useState<number>(0)
@@ -111,7 +126,7 @@ const CartComp = (props: Props) => {
       <span>{item.price}</span>
       </td>
      <td className={style.qty}>{item.qty}</td>
-     <td className={style.sub_total}>{item.price*item.qty}</td>
+     <td className={style.sub_total}>{+item.price*item.qty}</td>
      </tr>
         )
       })}

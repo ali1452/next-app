@@ -29,9 +29,9 @@ const MainLayout = ({data}:any) => {
             <p className={style.price}>Rs.{price}</p>
             <span className={style.sku}>
               Size:
-            {sku.map((item)=>{
+            {sku.map((item,index)=>{
               return(
-                <p style={{textTransform:'uppercase'}}>{item}</p>
+                <p key={index+1} style={{textTransform:'uppercase'}}>{item}</p>
               )
             })}
             </span>
