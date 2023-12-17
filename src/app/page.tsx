@@ -1,17 +1,17 @@
 import MainLayout from '@/container/mainLayout'
 import { fetchAllUsers } from '@/services/userservices'
 
-const getAllUser  =  async()=>{
-return await fetchAllUsers()
+// const getAllUser  =  async()=>{
+// return await fetchAllUsers()
 
-}
+// }
 
 export default async function Home() {
-  const {data} = await getAllUser()
+  // const {data} = await getAllUser()
   // console.log('wwww')
   return (
    <>
-   <MainLayout data={data} />
+   <MainLayout />
    </>
   )
 }

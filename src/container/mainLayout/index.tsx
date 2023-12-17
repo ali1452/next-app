@@ -6,7 +6,7 @@ import { productData } from './productdata'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const MainLayout = ({data}:any) => {
+const MainLayout = () => {
  
  console.log('data',productData)
     
