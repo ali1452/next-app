@@ -22,13 +22,18 @@
 
         @media (max-width:767px) {
             width: auto;
-            margin: 0px;
+            margin: auto;
+            margin-top: 10px;
             padding-inline: 10px;
         }
 
         th{
             padding: 10px 15px;
             @media (max-width:767px) {
+                padding: 0px;
+            }
+
+            @media (max-width:375px) {
                 padding: 0px;
             }
         }
@@ -39,7 +44,12 @@
             padding: 20px 0px;
             flex-wrap: wrap;
             @media (max-width:767px) {
+                max-width: 10rem;
+
+            }
+            @media (max-width:375px) {
                 width: auto;
+
             }
         }
 
@@ -78,6 +88,11 @@
 
     .price{
         padding: 0px 25px;
+
+        @media (max-width:767px) {
+            padding: 0px;
+            
+        }
     }
 
     .qty{
@@ -164,7 +179,7 @@
         margin: 10px 20px;
         padding-inline: 15px;
         @media (max-width:767px) {
-            width: 100%;
+            width: 23.5rem;
             margin: auto;
             margin-top: 10px;
         }

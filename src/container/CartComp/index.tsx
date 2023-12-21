@@ -27,7 +27,6 @@ type cartDayaType ={
 }
 
 const CartComp = (props: Props) => {
-  const [edit,setEdit] = useState<boolean>(false)
   const [product,setProduct] = useState<cartDayaType[]>([])
   const [discountCode, setDiscountCode] = useState<string>('')
   const [applyCode, setApplyCode] = useState<boolean>(false)
