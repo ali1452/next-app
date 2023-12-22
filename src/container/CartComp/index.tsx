@@ -1,12 +1,14 @@
 'use client'
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { productData } from '../mainLayout/productdata'
 import style from './cart.module.scss'
 import { useRouter } from 'next/navigation';
 import DeleteModal from './deleteModal/deleteModal';
 import { cartData } from './cartData'
+import { useDispatch, useSelector } from 'react-redux';
+import { increment, incrementByAmount } from '@/redux/slice/counterSlice';
 
 
 type Props = {}
@@ -34,18 +36,38 @@ const CartComp = (props: Props) => {
   const [errMsg, setErrMsg] = useState('')
   const [modal,setModal] = useState<boolean>(false)
   const route = useRouter()
+
+  const selector = useSelector(item=>item)
+  const dispatch=useDispatch()
+  
   
     useEffect(()=>{
+      
       setProduct(cartData)
 
     },[])
 
-    const changeQty=(e: string, index:number)=>{
+   
+    console.log('selector',selector)
+
+    const changeQty=(e: number, index:number)=>{
       const temp_element = [...product]
-      if(+e >0 && +e <= 5 ){
-        temp_element[index].qty = +e
-        setProduct(temp_element)
+      let str  = e.toString()
+      if((str).toString().length >1){
+        const select_qty = +str.charAt(1)
+        if(select_qty > 0 && select_qty  <= 5){
+          temp_element[index].qty = select_qty
+          setProduct(temp_element)
+          dispatch(incrementByAmount(select_qty))
+        }
+        }else{
+          if(e >0 && e <= 5 ){
+            temp_element[index].qty = +e
+            setProduct(temp_element)
+            dispatch(incrementByAmount(+e))
+          }
       }
+      
     }
 
     const subTotalAmt = ()=>{
@@ -115,7 +137,7 @@ const CartComp = (props: Props) => {
       {!item.edit ? <p><span className={style.bold_text}>quantity:</span>{item.qty}</p>:
       <>
       <label>QTY</label>
-      <p><input className={style.select_input} value={item.qty}  type="number" onChange={(e)=>changeQty(e.target.value,  index)}  /></p>
+      <p><input className={style.select_input} value={item.qty}  type="number" onChange={(e)=>changeQty(+e.target.value,  index)}  /></p>
       </>}
       {!item.edit && <p onClick={()=>editItems(index)} className={style.edit_btn}>edit</p>}
       {item.edit && <p onClick={()=>{saveItems(index)}} className={style.edit_btn}>Save</p>}
@@ -143,7 +165,7 @@ const CartComp = (props: Props) => {
      <div className={style.discount_box}>
     <p className={style.discount_heading}>Apply discount code</p>
     {<p style={{color:'red'}}>{errMsg}</p>}
-    <input disabled={applyCode} className={style.code_input} onChange={(e)=>setDiscountCode(e.target.value)} type='text' placeholder='enter your promo code' />
+    <input disabled={applyCode} className={style.code_input} onChange={(e)=>setDiscountCode((e.target.value.trim()))} type='text' placeholder='enter your promo code' />
     <button disabled={applyCode}  className={style.code_btn} onClick={()=>applyDiscount()} >Apply Discount</button>
    </div>
    </div>
