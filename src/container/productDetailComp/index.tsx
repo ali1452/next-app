@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { productData } from '../mainLayout/productdata'
 import style from './productDetail.module.scss'
 import Link from 'next/link'
+import Loader from '@/component/loader/loader'
 
 type Props = {
   id:string,
@@ -10,17 +11,21 @@ type Props = {
 
 const ProductDetail = ({id}: Props) => {
 
-  const[seletedProduct, setSelectedProduct] = useState<any>({})
+  const[seletedProduct, setSelectedProduct] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
   const productId = +id
   const product=productData[productId-1]
 
   useEffect(()=>{
     setSelectedProduct(product)
+    setLoading(false)
     
   },[product])
   console.log('product', product)
   return (
-    <div className={style.productDetail_container}>
+    <>
+    {loading && <Loader />}
+    {!loading && product && <div className={style.productDetail_container}>
       <p className={style.product_heading}>Product Detail</p>
       <div className={style.product_card}>
       <p className={style.product_name}>{seletedProduct.name}</p>
@@ -47,7 +52,8 @@ const ProductDetail = ({id}: Props) => {
       </div>
       </div>
       
-      </div>
+      </div>}
+      </>
   )
 }
 

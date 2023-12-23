@@ -1,7 +1,7 @@
 'use client'
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { productData } from '../mainLayout/productdata'
 import style from './cart.module.scss'
 import { useRouter } from 'next/navigation';
@@ -9,6 +9,7 @@ import DeleteModal from './deleteModal/deleteModal';
 import { cartData } from './cartData'
 import { useDispatch, useSelector } from 'react-redux';
 import { increment, incrementByAmount } from '@/redux/slice/counterSlice';
+import Loader from '@/component/loader/loader';
 
 
 type Props = {}
@@ -29,12 +30,13 @@ type cartDayaType ={
 }
 
 const CartComp = (props: Props) => {
-  const [product,setProduct] = useState<cartDayaType[]>([])
+  const [product,setProduct] = useState<cartDayaType[] | null>(null)
   const [discountCode, setDiscountCode] = useState<string>('')
   const [applyCode, setApplyCode] = useState<boolean>(false)
   const [codeAmt, setCodeAmt] = useState<number>(0)
   const [errMsg, setErrMsg] = useState('')
   const [modal,setModal] = useState<boolean>(false)
+  const [loading, setLoading] =useState<boolean>(true)
   const route = useRouter()
 
   const selector = useSelector(item=>item)
@@ -44,6 +46,7 @@ const CartComp = (props: Props) => {
     useEffect(()=>{
       
       setProduct(cartData)
+      setLoading(false)
 
     },[])
 
@@ -51,7 +54,8 @@ const CartComp = (props: Props) => {
     console.log('selector',selector)
 
     const changeQty=(e: number, index:number)=>{
-      const temp_element = [...product]
+      if(product !== null){
+        const temp_element = [...product]
       let str  = e.toString()
       if((str).toString().length >1){
         const select_qty = +str.charAt(1)
@@ -66,6 +70,7 @@ const CartComp = (props: Props) => {
             setProduct(temp_element)
             dispatch(incrementByAmount(+e))
           }
+      }
       }
       
     }
@@ -102,8 +107,12 @@ const CartComp = (props: Props) => {
       setProduct(tempData)
     }
   return (
-    <div className={style.cart_container} >
-      {product.length > 0  ?
+  <>
+    {loading && <Loader  /> }
+    
+   {!loading && <div className={style.cart_container} >
+     
+      {product && product.length > 0  ?
       <>
       <div className={style.detail_container}>
         <p className={style.cart_heading}>Shopping Cart</p>
@@ -165,7 +174,7 @@ const CartComp = (props: Props) => {
      <div className={style.discount_box}>
     <p className={style.discount_heading}>Apply discount code</p>
     {<p style={{color:'red'}}>{errMsg}</p>}
-    <input disabled={applyCode} className={style.code_input} onChange={(e)=>setDiscountCode((e.target.value.trim()))} type='text' placeholder='enter your promo code' />
+    <input disabled={applyCode} className={style.code_input} onChange={(e)=>setDiscountCode((e.target.value.trim().toLowerCase()))} type='text' placeholder='promo code' />
     <button disabled={applyCode}  className={style.code_btn} onClick={()=>applyDiscount()} >Apply Discount</button>
    </div>
    </div>
@@ -193,7 +202,8 @@ const CartComp = (props: Props) => {
   </>
       :<p>Cart is Empty</p>}
       
-    </div>
+    </div>}
+    </>
   )
 }
 
