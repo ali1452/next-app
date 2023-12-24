@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Stack } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { incrementByAmount } from '@/redux/slice/counterSlice';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -23,9 +25,11 @@ type Iprops ={
 }
 
 export default function DeleteModal({modal, setModal, setProduct}:Iprops) {
+  const dispatch = useDispatch()
   const handleClose = () => setModal(false);
   const deleteItem = () =>{
-    setProduct({})
+    setProduct([])
+    dispatch(incrementByAmount(0))
     setModal(false)
   }
 

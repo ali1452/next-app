@@ -41,19 +41,23 @@ const CartComp = (props: Props) => {
 
   const selector = useSelector(item=>item)
   const dispatch=useDispatch()
+
+  const fetchCartData=()=>{
+    setProduct(cartData)
+    setLoading(false)
+    let total_qty = 0
+    cartData.forEach(item=>(total_qty += item.qty))
+    dispatch(incrementByAmount(cartData.length))
+  }
   
   
     useEffect(()=>{
-      
-      setProduct(cartData)
-      setLoading(false)
-
+      fetchCartData()
     },[])
 
    
-    console.log('selector',selector)
-
     const changeQty=(e: number, index:number)=>{
+      let total_qty = 0
       if(product !== null){
         const temp_element = [...product]
       let str  = e.toString()
@@ -61,14 +65,16 @@ const CartComp = (props: Props) => {
         const select_qty = +str.charAt(1)
         if(select_qty > 0 && select_qty  <= 5){
           temp_element[index].qty = select_qty
+          temp_element.forEach(item=>total_qty += item.qty)
           setProduct(temp_element)
-          dispatch(incrementByAmount(select_qty))
+          dispatch(incrementByAmount(total_qty))
         }
         }else{
           if(e >0 && e <= 5 ){
             temp_element[index].qty = +e
+            temp_element.forEach(item=>total_qty += item.qty)
             setProduct(temp_element)
-            dispatch(incrementByAmount(+e))
+            dispatch(incrementByAmount(total_qty))
           }
       }
       }
@@ -200,7 +206,7 @@ const CartComp = (props: Props) => {
   </div>
   <DeleteModal modal={modal} setModal={(modal:boolean)=>setModal(modal)} setProduct={(item:any)=>setProduct(item)} />
   </>
-      :<p>Cart is Empty</p>}
+      :<p className={style.empty_cart}>Cart is Empty</p>}
       
     </div>}
     </>

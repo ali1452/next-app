@@ -11,7 +11,18 @@
     }
 
     .cart_icon{
+        position: relative;
         cursor: pointer;
         margin-right: 10px;
+
+        .count{
+            position: absolute;
+            font-size: 10px;
+            background-color: black;
+            right: -10px;
+            top:  -10px;
+            border-radius: 15px;
+            padding: 3px 7px;
+        }
     }
 }
