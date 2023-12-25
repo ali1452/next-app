@@ -2,31 +2,32 @@
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import React, { useEffect, useState } from 'react'
-import { productData } from '../mainLayout/productdata'
 import style from './cart.module.scss'
 import { useRouter } from 'next/navigation';
 import DeleteModal from './deleteModal/deleteModal';
-import { cartData } from './cartData'
 import { useDispatch, useSelector } from 'react-redux';
-import { increment, incrementByAmount } from '@/redux/slice/counterSlice';
+import { addCart, deleteAllCart } from '@/redux/slice/cartSlice';
 import Loader from '@/component/loader/loader';
 
 
 type Props = {}
+type cartPayload ={
+    name: string;
+    price: string; 
+    category: string; 
+    brand: string; 
+    description: string; 
+    url: string; 
+    discount_price: string; 
+    sku: string; 
+    qty: number;
+    edit:boolean
+  
+}
 
 type cartDayaType ={
-  name: string;
-  price: string; 
-  category: string; 
-  brand: string; 
-  description: string; 
-  url: string; 
-  discount_price: string; 
-  sku: string; 
-  qty: number;
-  edit?:boolean
-
-
+  type:string;
+   payload:cartPayload;
 }
 
 const CartComp = (props: Props) => {
@@ -39,15 +40,13 @@ const CartComp = (props: Props) => {
   const [loading, setLoading] =useState<boolean>(true)
   const route = useRouter()
 
-  const selector = useSelector(item=>item)
   const dispatch=useDispatch()
+  const cart:any = useSelector(item=>item)
+  const cartData = cart.cart.cart
 
   const fetchCartData=()=>{
     setProduct(cartData)
     setLoading(false)
-    let total_qty = 0
-    cartData.forEach(item=>(total_qty += item.qty))
-    dispatch(incrementByAmount(cartData.length))
   }
   
   
@@ -57,24 +56,21 @@ const CartComp = (props: Props) => {
 
    
     const changeQty=(e: number, index:number)=>{
-      let total_qty = 0
       if(product !== null){
-        const temp_element = [...product]
+        const temp_element = JSON.parse(JSON.stringify(product))
       let str  = e.toString()
       if((str).toString().length >1){
         const select_qty = +str.charAt(1)
         if(select_qty > 0 && select_qty  <= 5){
-          temp_element[index].qty = select_qty
-          temp_element.forEach(item=>total_qty += item.qty)
+          temp_element[index].payload.qty = select_qty
           setProduct(temp_element)
-          dispatch(incrementByAmount(total_qty))
+          dispatch(addCart(temp_element))
         }
         }else{
           if(e >0 && e <= 5 ){
-            temp_element[index].qty = +e
-            temp_element.forEach(item=>total_qty += item.qty)
+            temp_element[index].payload.qty = +e
             setProduct(temp_element)
-            dispatch(incrementByAmount(total_qty))
+            dispatch(addCart(temp_element))
           }
       }
       }
@@ -83,9 +79,12 @@ const CartComp = (props: Props) => {
 
     const subTotalAmt = ()=>{
       let amount = 0
-      cartData.forEach(item=>amount += +item.price*item.qty)
-      return  amount
-
+      if(product !== null){
+        product.forEach((item:any)=>amount += +item.payload.price*item.payload.qty)
+        return  amount
+      }else{
+        return 0
+      }
     }
 
     const applyDiscount=()=>{
@@ -101,17 +100,21 @@ const CartComp = (props: Props) => {
 
     }
     const editItems =(index:number)=>{
-      const  tempData = [...cartData]
-      tempData[index].edit = true
-      setProduct(tempData)
-
+      if(product !== null){
+        const  tempData = JSON.parse(JSON.stringify(product))
+        tempData[index].payload.edit = true
+        setProduct(tempData)
+      }
     }
 
     const saveItems =(index:number)=>{
-      const  tempData = [...cartData]
-      tempData[index].edit = false
-      setProduct(tempData)
+      if(product !== null){
+        const  tempData = JSON.parse(JSON.stringify(product))
+        tempData[index].payload.edit = false
+        setProduct(tempData)
+      }
     }
+
   return (
   <>
     {loading && <Loader  /> }
@@ -137,11 +140,11 @@ const CartComp = (props: Props) => {
 <tr  key={index+1}>
      <td className={style.item_container}>
       <div>
-      <p style={{width:'120px'}}><img src={item.url} /></p>
+      <p style={{width:'120px'}}><img src={item.payload.url} /></p>
       </div>
       <div className={style.detail_box}>
-      <p className={style.bold_text}>{item.name}</p>
-      {!item.edit ?<p><span className={style.bold_text}>Size:</span>{item.sku}</p>:
+      <p className={style.bold_text}>{item.payload.name}</p>
+      {!item.payload.edit ?<p><span className={style.bold_text}>Size:</span>{item.payload.sku}</p>:
       <p>
          <select className={style.select_input}  name="size" id="size">
           <option value="small">small</option>
@@ -149,20 +152,20 @@ const CartComp = (props: Props) => {
           <option value="large">large</option>
          </select>
         </p>}
-      {!item.edit ? <p><span className={style.bold_text}>quantity:</span>{item.qty}</p>:
+      {!item.payload.edit ? <p><span className={style.bold_text}>quantity:</span>{item.payload.qty}</p>:
       <>
       <label>QTY</label>
-      <p><input className={style.select_input} value={item.qty}  type="number" onChange={(e)=>changeQty(+e.target.value,  index)}  /></p>
+      <p><input className={style.select_input} value={item.payload.qty}  type="number" onChange={(e)=>changeQty(+e.target.value,  index)}  /></p>
       </>}
-      {!item.edit && <p onClick={()=>editItems(index)} className={style.edit_btn}>edit</p>}
-      {item.edit && <p onClick={()=>{saveItems(index)}} className={style.edit_btn}>Save</p>}
+      {!item.payload.edit && <p onClick={()=>editItems(index)} className={style.edit_btn}>edit</p>}
+      {item.payload.edit && <p onClick={()=>{saveItems(index)}} className={style.edit_btn}>Save</p>}
       </div>
       </td>
      <td className={style.price}>
-      <span>{item.price}</span>
+      <span>{item.payload.price}</span>
       </td>
-     <td className={style.qty}>{item.qty}</td>
-     <td className={style.sub_total}>{+item.price*item.qty}</td>
+     <td className={style.qty}>{item.payload.qty}</td>
+     <td className={style.sub_total}>{+item.payload.price*item.payload.qty}</td>
      </tr>
         )
       })}

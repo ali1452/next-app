@@ -4,6 +4,8 @@ import { productData } from '../mainLayout/productdata'
 import style from './productDetail.module.scss'
 import Link from 'next/link'
 import Loader from '@/component/loader/loader'
+import { addCart } from '@/redux/slice/cartSlice'
+import { useDispatch } from 'react-redux'
 
 type Props = {
   id:string,
@@ -15,13 +17,18 @@ const ProductDetail = ({id}: Props) => {
   const [loading, setLoading] = useState(true)
   const productId = +id
   const product=productData[productId-1]
+  const dispatch = useDispatch()
 
   useEffect(()=>{
     setSelectedProduct(product)
     setLoading(false)
     
   },[product])
-  console.log('product', product)
+  
+const add_Cart_item =(value:any)=>{
+  dispatch(addCart(value))
+}
+
   return (
     <>
     {loading && <Loader />}
@@ -47,7 +54,7 @@ const ProductDetail = ({id}: Props) => {
       </div>
       </span>
       <div className={style.btn_container}>
-      <Link href='/cart'><p className={style.add_cart_btn}>Add to Cart</p></Link>
+      <p onClick={()=>add_Cart_item(seletedProduct)} className={style.add_cart_btn}>Add to Cart</p>
       <p  className={style.shop_btn}>Shop Now</p>
       </div>
       </div>

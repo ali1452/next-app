@@ -6,7 +6,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useSelector } from 'react-redux';
 
 const Header = () => {
-  const count= useSelector((item:any)=>item.counter.value)
+  const count= useSelector((item:any)=>item.cart.cart.length)
   return (
     <div className={style.header_container}>
         <p>Zeen</p>

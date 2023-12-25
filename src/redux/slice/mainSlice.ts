@@ -1,7 +1,7 @@
-import counterSlice from "./counterSlice"
+import cartSlice from "./cartSlice"
 
 const mainSliceReducer ={
-    counterSlice: counterSlice
+    cartSlice,
 
 }
 

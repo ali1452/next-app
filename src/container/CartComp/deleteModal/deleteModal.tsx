@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Stack } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { incrementByAmount } from '@/redux/slice/counterSlice';
+import { deleteAllCart } from '@/redux/slice/cartSlice';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -29,7 +29,7 @@ export default function DeleteModal({modal, setModal, setProduct}:Iprops) {
   const handleClose = () => setModal(false);
   const deleteItem = () =>{
     setProduct([])
-    dispatch(incrementByAmount(0))
+    dispatch(deleteAllCart())
     setModal(false)
   }
 
