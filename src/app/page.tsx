@@ -8,7 +8,6 @@ import { fetchAllUsers } from '@/services/userservices'
 
 export default async function Home() {
   // const {data} = await getAllUser()
-  // console.log('wwww')
   return (
    <>
    <MainLayout />

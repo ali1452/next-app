@@ -8,8 +8,6 @@ import Link from 'next/link'
 
 const MainLayout = () => {
  
- console.log('data',productData)
-    
   return (
     <div className={style.main_layout_container}>
         {/* <h1>Client List</h1>

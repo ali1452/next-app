@@ -6,13 +6,13 @@ import style from './cart.module.scss'
 import { useRouter } from 'next/navigation';
 import DeleteModal from './deleteModal/deleteModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCart, deleteAllCart } from '@/redux/slice/cartSlice';
+import { addCart, deleteAllCart,cartItemAdded } from '@/redux/slice/cartSlice';
 import Loader from '@/component/loader/loader';
 
 
 type Props = {}
-type cartPayload ={
-    name: string;
+type cartDataType ={
+  name: string;
     price: string; 
     category: string; 
     brand: string; 
@@ -25,13 +25,8 @@ type cartPayload ={
   
 }
 
-type cartDayaType ={
-  type:string;
-   payload:cartPayload;
-}
-
 const CartComp = (props: Props) => {
-  const [product,setProduct] = useState<cartDayaType[] | null>(null)
+  const [product,setProduct] = useState<cartDataType[] | null>(null)
   const [discountCode, setDiscountCode] = useState<string>('')
   const [applyCode, setApplyCode] = useState<boolean>(false)
   const [codeAmt, setCodeAmt] = useState<number>(0)
@@ -62,15 +57,15 @@ const CartComp = (props: Props) => {
       if((str).toString().length >1){
         const select_qty = +str.charAt(1)
         if(select_qty > 0 && select_qty  <= 5){
-          temp_element[index].payload.qty = select_qty
+          temp_element[index].qty = select_qty
           setProduct(temp_element)
-          dispatch(addCart(temp_element))
+          dispatch(cartItemAdded(temp_element))
         }
         }else{
           if(e >0 && e <= 5 ){
-            temp_element[index].payload.qty = +e
+            temp_element[index].qty = +e
             setProduct(temp_element)
-            dispatch(addCart(temp_element))
+            dispatch(cartItemAdded(temp_element))
           }
       }
       }
@@ -80,7 +75,7 @@ const CartComp = (props: Props) => {
     const subTotalAmt = ()=>{
       let amount = 0
       if(product !== null){
-        product.forEach((item:any)=>amount += +item.payload.price*item.payload.qty)
+        product.forEach((item:any)=>amount += +item.price*item.qty)
         return  amount
       }else{
         return 0
@@ -102,7 +97,7 @@ const CartComp = (props: Props) => {
     const editItems =(index:number)=>{
       if(product !== null){
         const  tempData = JSON.parse(JSON.stringify(product))
-        tempData[index].payload.edit = true
+        tempData[index].edit = true
         setProduct(tempData)
       }
     }
@@ -110,7 +105,7 @@ const CartComp = (props: Props) => {
     const saveItems =(index:number)=>{
       if(product !== null){
         const  tempData = JSON.parse(JSON.stringify(product))
-        tempData[index].payload.edit = false
+        tempData[index].edit = false
         setProduct(tempData)
       }
     }
@@ -140,11 +135,11 @@ const CartComp = (props: Props) => {
 <tr  key={index+1}>
      <td className={style.item_container}>
       <div>
-      <p style={{width:'120px'}}><img src={item.payload.url} /></p>
+      <p style={{width:'120px'}}><img src={item.url} /></p>
       </div>
       <div className={style.detail_box}>
-      <p className={style.bold_text}>{item.payload.name}</p>
-      {!item.payload.edit ?<p><span className={style.bold_text}>Size:</span>{item.payload.sku}</p>:
+      <p className={style.bold_text}>{item.name}</p>
+      {!item.edit ?<p><span className={style.bold_text}>Size:</span>{item.sku}</p>:
       <p>
          <select className={style.select_input}  name="size" id="size">
           <option value="small">small</option>
@@ -152,20 +147,20 @@ const CartComp = (props: Props) => {
           <option value="large">large</option>
          </select>
         </p>}
-      {!item.payload.edit ? <p><span className={style.bold_text}>quantity:</span>{item.payload.qty}</p>:
+      {!item.edit ? <p><span className={style.bold_text}>quantity:</span>{item.qty}</p>:
       <>
       <label>QTY</label>
-      <p><input className={style.select_input} value={item.payload.qty}  type="number" onChange={(e)=>changeQty(+e.target.value,  index)}  /></p>
+      <p><input className={style.select_input} value={item.qty}  type="number" onChange={(e)=>changeQty(+e.target.value,  index)}  /></p>
       </>}
-      {!item.payload.edit && <p onClick={()=>editItems(index)} className={style.edit_btn}>edit</p>}
-      {item.payload.edit && <p onClick={()=>{saveItems(index)}} className={style.edit_btn}>Save</p>}
+      {!item.edit && <p onClick={()=>editItems(index)} className={style.edit_btn}>edit</p>}
+      {item.edit && <p onClick={()=>{saveItems(index)}} className={style.edit_btn}>Save</p>}
       </div>
       </td>
      <td className={style.price}>
-      <span>{item.payload.price}</span>
+      <span>{item.price}</span>
       </td>
-     <td className={style.qty}>{item.payload.qty}</td>
-     <td className={style.sub_total}>{+item.payload.price*item.payload.qty}</td>
+     <td className={style.qty}>{item.qty}</td>
+     <td className={style.sub_total}>{+item.price*item.qty}</td>
      </tr>
         )
       })}
