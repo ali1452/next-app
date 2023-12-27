@@ -4,8 +4,8 @@ import { productData } from '../mainLayout/productdata'
 import style from './productDetail.module.scss'
 import Link from 'next/link'
 import Loader from '@/component/loader/loader'
-import { addCart } from '@/redux/slice/cartSlice'
-import { useDispatch } from 'react-redux'
+import { addCart,addItemQty } from '@/redux/slice/cartSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 type Props = {
   id:string,
@@ -18,6 +18,7 @@ const ProductDetail = ({id}: Props) => {
   const productId = +id
   const product=productData[productId-1]
   const dispatch = useDispatch()
+  const selector = useSelector((item:any)=>item.cart)
 
   useEffect(()=>{
     setSelectedProduct(product)
@@ -26,7 +27,20 @@ const ProductDetail = ({id}: Props) => {
   },[product])
   
 const add_Cart_item =(value:any)=>{
-  dispatch(addCart(value))
+  let added = true
+  const tempVal = {...value}
+  const stateItem = selector.cart
+  stateItem.filter((item:any,index:number)=>{
+if(item.product_id == tempVal.product_id){
+  if(stateItem[index].qty < 5){
+    dispatch(addItemQty(index))
+  }
+  added = false
+}
+  })
+  if(added){
+    dispatch(addCart(tempVal))
+  }
 }
 
   return (
