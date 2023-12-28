@@ -6,7 +6,7 @@ import style from './cart.module.scss'
 import { useRouter } from 'next/navigation';
 import DeleteModal from './deleteModal/deleteModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCart, deleteAllCart,cartItemAdded } from '@/redux/slice/cartSlice';
+import { addCart, deleteAllCart,cartItemAdded, addItemQty } from '@/redux/slice/cartSlice';
 import Loader from '@/component/loader/loader';
 
 
@@ -20,8 +20,10 @@ type cartDataType ={
     url: string; 
     discount_price: string; 
     sku: string; 
+    size: string;
     qty: number;
-    edit:boolean
+    edit:boolean;
+    product_id:string
   
 }
 
@@ -38,6 +40,7 @@ const CartComp = (props: Props) => {
   const dispatch=useDispatch()
   const cart:any = useSelector(item=>item)
   const cartData = cart.cart.cart
+  console.log('state', cartData)
 
   const fetchCartData=()=>{
     setProduct(cartData)
@@ -110,6 +113,29 @@ const CartComp = (props: Props) => {
       }
     }
 
+    const changeSkuSize =(e: React.ChangeEvent<HTMLSelectElement>,index:number)=>{
+      if(product !== null){
+        let addedItem  = true
+        const optedSize = e.target.value
+        const temp_product = [...product]
+        temp_product.filter((item,i)=>{
+          if((item.product_id == temp_product[index].product_id) && (item.size == optedSize)){
+            addedItem = false
+            temp_product.splice(index,1)
+            item.qty += 1 
+          }
+        })
+        if(!addedItem){
+          setProduct(temp_product)
+          dispatch(cartItemAdded(temp_product))
+        }else{
+          temp_product[index].size = optedSize
+          setProduct(temp_product)
+        }
+        
+      }
+    }
+
   return (
   <>
     {loading && <Loader  /> }
@@ -139,15 +165,15 @@ const CartComp = (props: Props) => {
       </div>
       <div className={style.detail_box}>
       <p className={style.bold_text}>{item.name}</p>
-      {!item.edit ?<p><span className={style.bold_text}>Size:</span>{item.sku}</p>:
+      {!item.edit ?<p><span className={style.bold_text}>Size:</span><span style={{textTransform:'uppercase'}}>{item.size}</span></p>:
       <p>
-         <select className={style.select_input}  name="size" id="size">
-          <option value="small">small</option>
-          <option value="medium">medium</option>
-          <option value="large">large</option>
+         <select value={item.size} className={style.select_input}  name="size" id="size" onChange={(e)=>changeSkuSize(e,index)}>
+          <option value="s">S</option>
+          <option value="m">M</option>
+          <option value="l">L</option>
          </select>
         </p>}
-      {!item.edit ? <p><span className={style.bold_text}>quantity:</span>{item.qty}</p>:
+    {!item.edit ? <p><span className={style.bold_text}>Quantity:</span>{item.qty}</p>:
       <>
       <label>QTY</label>
       <p><input className={style.select_input} value={item.qty}  type="number" onChange={(e)=>changeQty(+e.target.value,  index)}  /></p>

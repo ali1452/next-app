@@ -15,6 +15,8 @@ const ProductDetail = ({id}: Props) => {
 
   const[seletedProduct, setSelectedProduct] = useState<any>(null)
   const [loading, setLoading] = useState(true)
+  const  [selectedSize,setSelectedSize] = useState('')
+  const [error, setError] =useState('')
   const productId = +id
   const product=productData[productId-1]
   const dispatch = useDispatch()
@@ -29,24 +31,37 @@ const ProductDetail = ({id}: Props) => {
 const add_Cart_item =(value:any)=>{
   let added = true
   const tempVal = {...value}
-  const stateItem = selector.cart
-  stateItem.filter((item:any,index:number)=>{
-if(item.product_id == tempVal.product_id){
-  if(stateItem[index].qty < 5){
-    dispatch(addItemQty(index))
+  if(selectedSize !== ''){
+    setError('')
+    tempVal.size = selectedSize
+    const stateItem = selector.cart
+    stateItem.filter((item:any,index:number)=>{
+  if((item.product_id == tempVal.product_id) && (item.size == tempVal.size)){
+    if(stateItem[index].qty < 5){
+      dispatch(addItemQty(index))
+    }
+    added = false
   }
-  added = false
+    })
+    if(added){
+      dispatch(addCart(tempVal))
+    }
+
+  }else{
+    setError('Please Select Size First.')
+  }
+ 
 }
-  })
-  if(added){
-    dispatch(addCart(tempVal))
-  }
+
+const selectOption=(e: React.FormEvent<HTMLOptionElement>)=>{
+setSelectedSize(e.target.value)
 }
 
   return (
     <>
     {loading && <Loader />}
     {!loading && product && <div className={style.productDetail_container}>
+      <p className={style.err}>{error}</p>
       <p className={style.product_heading}>Product Detail</p>
       <div className={style.product_card}>
       <p className={style.product_name}>{seletedProduct.name}</p>
@@ -55,11 +70,15 @@ if(item.product_id == tempVal.product_id){
       <div>
       <div  className={style.size_container}>
       Size:  
-      {seletedProduct.sku?.map((size:string)=>{
-        return(
-          <p key={size}>{size}</p>
-        )
-      })}
+        <select value={selectedSize ==  null ? '':selectedSize} onChange={(e)=>selectOption(e)}>
+        <option value=''>Select</option>
+          {seletedProduct.sku?.map((size:string)=>{
+                return(
+                  <option key={size} value={size}>{size}</option>
+                )
+              })} 
+          
+        </select>
       </div>
       <p>Category: <span>{seletedProduct.category}</span></p>
       <p>Brand: <span>{seletedProduct.brand}</span></p>

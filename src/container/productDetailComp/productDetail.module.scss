@@ -11,6 +11,12 @@
         max-width: 90%;
     }
 
+    .err{
+        color: red;
+        font-size: 32px;
+        text-align: center;
+    }
+
     .product_heading{
         font-size: 48px;
         text-align: center;
@@ -57,6 +63,12 @@
     
         .size_container{
             display: flex;
+            select {
+            border: 1px solid;
+            text-transform: uppercase;
+            padding: 3px;
+            margin-left: 5px;
+        }
             p{
                 padding-inline-end: 4px;
                 text-transform: uppercase;
