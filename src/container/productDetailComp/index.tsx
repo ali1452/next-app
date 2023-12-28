@@ -53,7 +53,7 @@ const add_Cart_item =(value:any)=>{
  
 }
 
-const selectOption=(e: React.FormEvent<HTMLOptionElement>)=>{
+const selectOption=(e: any)=>{
 setSelectedSize(e.target.value)
 }
 
