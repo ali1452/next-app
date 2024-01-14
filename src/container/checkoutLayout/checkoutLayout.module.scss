@@ -1,0 +1,27 @@
+.checkout_container{
+    display: flex;
+    width: 100%;
+    max-width: 98%;
+    margin: auto;
+    margin-top: 20px;
+
+    input, select {
+        border: 1px solid black;
+        border-radius: 4px;
+        padding: 10px;
+        margin: 10px 0px;
+    }
+
+    .full_input{
+        width: 96%;
+    }
+
+    .detail_box{
+        flex: 1;
+
+    }
+    .payment_box{
+        flex: 1;
+
+    }
+}

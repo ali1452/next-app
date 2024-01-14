@@ -15,6 +15,10 @@
         color: red;
         font-size: 32px;
         text-align: center;
+
+        @media (max-width:767px) {
+            font-size: 18px;
+        }
     }
 
     .product_heading{
@@ -63,6 +67,10 @@
     
         .size_container{
             display: flex;
+
+            @media (max-width:767px) {
+                padding-top:10px;
+            }
             select {
             border: 1px solid;
             text-transform: uppercase;
