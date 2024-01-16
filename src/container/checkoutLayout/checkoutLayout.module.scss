@@ -12,8 +12,27 @@
         margin: 10px 0px;
     }
 
+    .flex_box{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 96%;
+
+    }
+    .name_input{
+        width: 48%;
+    }
+
     .full_input{
         width: 96%;
+    }
+
+    .select_input{
+        width: 48%;
+    }
+
+    .check_box{
+        margin-right: 5px;
     }
 
     .detail_box{
