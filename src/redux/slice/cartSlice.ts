@@ -28,7 +28,7 @@ const cartSlice = createSlice({
     },
     deleteAllCart(state){
       state.cart = initialState.cart
-    }
+    },
     
   },
 })

@@ -40,7 +40,6 @@ const CartComp = (props: Props) => {
   const dispatch=useDispatch()
   const cart:any = useSelector(item=>item)
   const cartData = cart.cart.cart
-  console.log('state', cartData)
 
   const fetchCartData=()=>{
     setProduct(cartData)

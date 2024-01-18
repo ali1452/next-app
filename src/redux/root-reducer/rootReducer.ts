@@ -25,6 +25,7 @@ export const storage =
 export const rootPersistConfig = {
   key: 'root',
   storage,
+  version:1,
   keyPrefix: 'redux-',
   whitelist: [],
 };

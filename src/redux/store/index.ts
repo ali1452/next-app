@@ -5,7 +5,7 @@ import {
   useSelector as useAppSelector,
 } from 'react-redux';
 import { persistStore, persistReducer } from 'redux-persist';
-import rootReducer, { rootPersistConfig } from '../root-reducer/rootReducer';
+import rootReducer, { rootPersistConfig, storage } from '../root-reducer/rootReducer';
 // import rootReducer, { rootPersistConfig } from '.root-reducer/rootReducer';
 
 // ----------------------------------------------------------------------
@@ -16,9 +16,16 @@ export type RootState = ReturnType<typeof rootReducer>;
 // Define the type for dispatching actions from the store
 export type AppDispatch = typeof store.dispatch;
 
+const persistConfig ={
+  key:'root',
+  storage
+}
+
+const persistedReducer = persistReducer(persistConfig,rootReducer)
+
 const store = configureStore({
   // Use persistReducer to enable data persistence
-  reducer: persistReducer(rootPersistConfig, rootReducer),
+  reducer:  persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
