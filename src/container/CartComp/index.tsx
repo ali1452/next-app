@@ -135,6 +135,11 @@ const CartComp = (props: Props) => {
       }
     }
 
+    const chekout =()=>{
+      setLoading(true)
+      route.push('/checkout')
+    }
+
   return (
   <>
     {loading && <Loader  /> }
@@ -225,7 +230,7 @@ const CartComp = (props: Props) => {
     <p>Order Total</p>
     <p>{subTotalAmt() !==0?<>Rs.{subTotalAmt() - codeAmt +  100}</>:0.00}</p>
   </div>
-  <p className={style.checkout_btn}>go to checkout</p>
+  <p className={style.checkout_btn} onClick={()=>chekout()}>go to checkout</p>
   </div>
   <DeleteModal modal={modal} setModal={(modal:boolean)=>setModal(modal)} setProduct={(item:any)=>setProduct(item)} />
   </>

@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 import style  from'./checkoutLayout.module.scss'
+import { Accordion, AccordionActions, AccordionDetails, AccordionSummary, Button } from '@mui/material'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const CheckoutLayout = () => {
 
@@ -101,7 +103,50 @@ const CheckoutLayout = () => {
         </div>
         </form>:""}
         </div>
-        <div className={style.payment_box}>World</div>
+        <div className={style.payment_box}>
+          <p>Payment Methods</p>
+        <input  type='radio' /><label>Cash on delivery</label><br/>
+        <input  type='radio' /><label>Cash on delivery</label>
+        <p>Apply Discount</p>
+        <p>Order Summary</p>
+        <Accordion defaultExpanded>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel3-content"
+          id="panel3-header"
+        >
+          1 Item in Cart
+        </AccordionSummary>
+        <AccordionDetails>
+          <div style={{display:'flex'}}>
+            <div style={{flex:'1'}}>
+              <p>Cart subtotal</p>
+              <p>shipping</p>
+              <p>Order Total</p>
+            </div>
+            <div style={{flex:'1'}}>
+              <p>Rs.5000</p>
+              <p>Rs.200</p>
+              <p>Rs.5200</p>
+            </div>
+          </div>
+        </AccordionDetails>
+      </Accordion>
+      <div style={{display:'flex', justifyContent:'space-between'}}>
+         <p style={{flex:'1'}}>Product Name</p>
+         <p style={{flex:'1'}}>QTY</p>
+         <p style={{flex:'1'}}>Subtotal</p>
+        </div>
+        <div style={{display:'flex', justifyContent:'space-between',  marginTop:'10px'}}>
+         <p style={{flex:'1'}}>XYZ</p>
+         <p style={{flex:'1'}}>01</p>
+         <p style={{flex:'1'}}>Rs.1000</p>
+        </div>
+        <div style={{display:'flex',justifyContent:'space-between', maxWidth:'77%'}}>
+          <p>Please Note: Land duty and taxes to be borne by customer</p>
+          <p>Place Order</p>
+          </div>
+        </div>
         </div>
   )
 }
