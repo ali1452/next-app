@@ -4,10 +4,12 @@ import React, { useState } from 'react'
 import style  from'./checkoutLayout.module.scss'
 import { Accordion, AccordionActions, AccordionDetails, AccordionSummary, Button } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 const CheckoutLayout = () => {
 
   const [defaultAddress, setDefaultAddress]  = useState(true)
+  const [isPayment, setIspayment] = useState(true)
 
   return (
     <div className={style.checkout_container}>
@@ -104,9 +106,28 @@ const CheckoutLayout = () => {
         </form>:""}
         </div>
         <div className={style.payment_box}>
-          <p>Payment Methods</p>
-        <input  type='radio' /><label>Cash on delivery</label><br/>
-        <input  type='radio' /><label>Cash on delivery</label>
+          <p className={style.payment_heading}>
+          <CreditCardIcon />
+            <span>Payment Methods</span>
+          </p>
+        <input checked={isPayment} onChange={()=>setIspayment(!isPayment)}  type='radio' /><label className={style.payment_label}>Cash on delivery</label><br/>
+        <input checked={!isPayment} onChange={()=>setIspayment(!isPayment)} type='radio' /><label className={style.payment_label}>
+        <img src="https://www.gulahmedshop.com/static/version1706155957/frontend/Codazon/fastest_ellyana/en_US/Apps_PayFastPayment/img/payfast_logo_loading.png"/>
+        </label>
+        {!isPayment  && <div>
+          <label>Credit Card Number</label><br></br>
+          <input type='text' placeholder='card number' /><br/>
+          <label>Expiration Date</label><br/>
+          <p style={{display:'flex', gap:'10px'}}>
+          <input type='text' placeholder='card number' />
+          <input type='text' placeholder='card number' />
+          </p>
+          <br/>
+          <label>CVC</label><br/>
+          <input type='text'placeholder='cvc' />
+
+
+        </div>}
         <p>Apply Discount</p>
         <p>Order Summary</p>
         <Accordion defaultExpanded>
