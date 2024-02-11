@@ -118,7 +118,7 @@ const CheckoutLayout = () => {
           <label>Credit Card Number</label><br></br>
           <input type='text' placeholder='card number' /><br/>
           <label>Expiration Date</label><br/>
-          <p style={{display:'flex', gap:'10px'}}>
+          <p className={style.card_input_div}>
           <input type='text' placeholder='card number' />
           <input type='text' placeholder='card number' />
           </p>
@@ -139,13 +139,13 @@ const CheckoutLayout = () => {
           1 Item in Cart
         </AccordionSummary>
         <AccordionDetails>
-          <div style={{display:'flex'}}>
-            <div style={{flex:'1'}}>
+          <div className={style.accordion_detail_wrap}>
+            <div className={style.item_detail}>
               <p>Cart subtotal</p>
               <p>shipping</p>
               <p>Order Total</p>
             </div>
-            <div style={{flex:'1'}}>
+            <div className={style.item_detail}>
               <p>Rs.5000</p>
               <p>Rs.200</p>
               <p>Rs.5200</p>
@@ -153,19 +153,19 @@ const CheckoutLayout = () => {
           </div>
         </AccordionDetails>
       </Accordion>
-      <div style={{display:'flex', justifyContent:'space-between'}}>
-         <p style={{flex:'1'}}>Product Name</p>
-         <p style={{flex:'1'}}>QTY</p>
-         <p style={{flex:'1'}}>Subtotal</p>
+      <div className={style.order_detail}>
+         <p className={style.flex_one}>Product Name</p>
+         <p className={style.flex_one}>QTY</p>
+         <p className={style.flex_one}>Subtotal</p>
         </div>
-        <div style={{display:'flex', justifyContent:'space-between',  marginTop:'10px'}}>
-         <p style={{flex:'1'}}>XYZ</p>
-         <p style={{flex:'1'}}>01</p>
-         <p style={{flex:'1'}}>Rs.1000</p>
+        <div className={style.order_qty}>
+         <p className={style.flex_one}>XYZ</p>
+         <p className={style.flex_one}>01</p>
+         <p className={style.flex_one}>Rs.1000</p>
         </div>
-        <div style={{display:'flex',justifyContent:'space-between', maxWidth:'77%'}}>
+        <div className={style.place_order}>
           <p>Please Note: Land duty and taxes to be borne by customer</p>
-          <p>Place Order</p>
+          <p className={style.order_btn}>Place Order</p>
           </div>
         </div>
         </div>

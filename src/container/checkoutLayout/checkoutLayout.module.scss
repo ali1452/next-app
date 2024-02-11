@@ -59,5 +59,75 @@
             }
         }
 
+        .card_input_div{
+            display: flex;
+            gap: 10px;
+        }
+
+        .accordion_detail_wrap{
+            display: flex;
+
+        }
+
+        .item_detail{
+            flex:1
+        }
+
+        .order_detail {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .order_qty {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .flex_one {
+            flex: 1;
+        }
+
+        .place_order{
+            display: flex;
+            justify-content: space-between;
+            max-width:77%;
+            margin-top: 40px;
+
+            @media (max-width:767px) {
+                display: block;
+                max-width: 100%;
+            }
+
+            .order_btn{
+                background-color: blueviolet;
+                color: #fff;
+                width: 200px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 18px;
+                border-radius: 5px;
+                cursor: pointer;
+
+                @media (max-width:767px) {
+                    width: 100%;
+                    max-width: 50%;
+                    margin: auto;
+                    padding: 10px;
+                    
+                }
+
+                &:hover{
+                     background-color: #000;
+                     color: #fff;
+                     outline: 1px solid #000;
+                }
+            }
+
+        }
+
+      
+
     }
 }
