@@ -15,13 +15,13 @@ const CheckoutLayout = () => {
     <div className={style.checkout_container}>
         <div className={style.detail_box}>
         <form>
-        <label >Contact Information</label><br/>
+        <label className={style.heading} >Contact Information</label><br/>
         <input  className={style.full_input} type="text" placeholder='Email Address' id="constact" name="contact" /><br/>
         <div className={style.flex_box}>
         <input className={style.name_input} type="text" placeholder='First Name' id="first_name" name="first_name"/>
         <input className={style.name_input} type="text" placeholder='Last Name' id="last_name" name="last_name"/>
         </div>
-        <label >Shipping Address</label><br/>
+        <label className={style.heading} >Shipping Address</label><br/>
         <input className={style.full_input} type="text" placeholder='Street Address' id="constact" name="contact" /><br/>
         <div className={style.flex_box}>
         <select className={style.select_input}>

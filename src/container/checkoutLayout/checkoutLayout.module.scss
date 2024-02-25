@@ -4,10 +4,17 @@
     max-width: 98%;
     margin: auto;
     margin-top: 20px;
+    height: 84vh;
 
     @media (max-width:767px) {
         flex-direction: column;
+        height: auto;
         
+    }
+
+    .heading{
+        font-size: 24px;
+        font-weight: 600;
     }
 
     input, select {
