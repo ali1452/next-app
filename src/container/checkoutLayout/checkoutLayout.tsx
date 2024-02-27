@@ -11,7 +11,7 @@ const CheckoutLayout = () => {
 
   const [defaultAddress, setDefaultAddress]  = useState(true)
   const [isPayment, setIspayment] = useState(true)
-  const selector = useSelector(state=>state)
+  const selector:any = useSelector(state=>state)
   const cartData = selector.cart.cart
   const cartItems = cartData.length
 
@@ -171,10 +171,10 @@ const CheckoutLayout = () => {
          <p className={style.flex_one}>QTY</p>
          <p className={style.flex_one}>Subtotal</p>
         </div>
-        {cartData && cartData.length >0 && cartData?.map((item:any)=>{
+        {cartData && cartData.length >0 && cartData?.map((item:any, index:number)=>{
           const {name,qty,price}= item
           return(
-        <div className={style.order_qty}>
+        <div className={style.order_qty}key={index+'item'}>
          <p className={style.flex_one}>{name}</p>
          <p className={style.flex_one}>{qty}</p>
          <p className={style.flex_one}>Rs.{price}</p>
