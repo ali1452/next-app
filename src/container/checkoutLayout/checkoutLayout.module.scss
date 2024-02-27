@@ -9,6 +9,8 @@
     @media (max-width:767px) {
         flex-direction: column;
         height: auto;
+        margin-bottom: 20px;
+
         
     }
 
@@ -22,6 +24,7 @@
         border-radius: 4px;
         padding: 10px;
         margin: 10px 0px;
+        
     }
 
     .flex_box{
@@ -69,6 +72,7 @@
         .card_input_div{
             display: flex;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .accordion_detail_wrap{

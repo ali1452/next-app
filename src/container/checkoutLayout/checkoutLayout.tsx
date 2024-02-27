@@ -5,11 +5,24 @@ import style  from'./checkoutLayout.module.scss'
 import { Accordion, AccordionActions, AccordionDetails, AccordionSummary, Button } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
+import { useSelector } from 'react-redux';
 
 const CheckoutLayout = () => {
 
   const [defaultAddress, setDefaultAddress]  = useState(true)
   const [isPayment, setIspayment] = useState(true)
+  const selector = useSelector(state=>state)
+  const cartData = selector.cart.cart
+  const cartItems = cartData.length
+
+  const cartTotal =()=> {
+  let totalAmt = 0
+  cartData.forEach((item:any)=>{
+  const {price} = item
+  totalAmt += +price
+  })
+  return totalAmt
+}
 
   return (
     <div className={style.checkout_container}>
@@ -136,7 +149,7 @@ const CheckoutLayout = () => {
           aria-controls="panel3-content"
           id="panel3-header"
         >
-          1 Item in Cart
+          {cartItems} Item in Cart
         </AccordionSummary>
         <AccordionDetails>
           <div className={style.accordion_detail_wrap}>
@@ -146,9 +159,9 @@ const CheckoutLayout = () => {
               <p>Order Total</p>
             </div>
             <div className={style.item_detail}>
-              <p>Rs.5000</p>
+              <p>Rs.{cartTotal()}</p>
               <p>Rs.200</p>
-              <p>Rs.5200</p>
+              <p>Rs.{cartTotal() + 200}</p>
             </div>
           </div>
         </AccordionDetails>
@@ -158,11 +171,18 @@ const CheckoutLayout = () => {
          <p className={style.flex_one}>QTY</p>
          <p className={style.flex_one}>Subtotal</p>
         </div>
+        {cartData && cartData.length >0 && cartData?.map((item:any)=>{
+          const {name,qty,price}= item
+          return(
         <div className={style.order_qty}>
-         <p className={style.flex_one}>XYZ</p>
-         <p className={style.flex_one}>01</p>
-         <p className={style.flex_one}>Rs.1000</p>
+         <p className={style.flex_one}>{name}</p>
+         <p className={style.flex_one}>{qty}</p>
+         <p className={style.flex_one}>Rs.{price}</p>
         </div>
+          )
+          
+        })} 
+        
         <div className={style.place_order}>
           <p>Please Note: Land duty and taxes to be borne by customer</p>
           <p className={style.order_btn}>Place Order</p>
