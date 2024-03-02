@@ -16,15 +16,13 @@ const Header = () => {
 
   return (
     <div className={style.header_container}>
-        <p>Zeen</p>
+         <Link href='/'><p>M&B Fashion</p></Link>
         <p>All Your Needs</p>
         <p>
         <Link href='/cart'>
           <span className={style.cart_icon}><ShoppingCartIcon  />
           {total_item >0?<span className={style.count}>{total_item}</span>:""}
           </span></Link>
-       
-        <Link href='/'><span>Products</span></Link>
         </p>
         </div>
   )
