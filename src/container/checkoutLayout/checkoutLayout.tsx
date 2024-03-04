@@ -157,7 +157,7 @@ const placeOrder =()=>{
 }
 if(!successMsg && cartData.length == 0){
   router.push('/')
-  return;
+  
 }
   return (
     <div className={style.checkout_container}>
