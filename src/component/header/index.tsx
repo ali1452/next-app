@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <div className={style.header_container}>
-         <Link href='/'><p>M&B Fashion</p></Link>
+         <Link href='/'><p>M&B</p></Link>
         <p>All Your Needs</p>
         <p>
         <Link href='/cart'>

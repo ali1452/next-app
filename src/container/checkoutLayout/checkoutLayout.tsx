@@ -5,7 +5,10 @@ import style  from'./checkoutLayout.module.scss'
 import { Accordion, AccordionActions, AccordionDetails, AccordionSummary, Button } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteAllCart } from '@/redux/slice/cartSlice';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const CheckoutLayout = () => {
 
@@ -35,7 +38,11 @@ const CheckoutLayout = () => {
     zip_err:false,
     mobile_num_err:false
   })
+  const [orderErr,setOrderErr] =useState(false)
+  const [successMsg, setSuccessMsg]  = useState(false)
   const selector:any = useSelector(state=>state)
+  const router = useRouter()
+  const dispatch = useDispatch()
   const cartData = selector.cart.cart
   const cartItems = cartData.length
 
@@ -48,12 +55,12 @@ const CheckoutLayout = () => {
   return totalAmt
 }
 
-const changeCustomerInfo =(e: React.ChangeEvent<HTMLInputElement>)=>{
+const changeCustomerInfo =(e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>)=>{
   setCustomerInfo({...customerInfo,[e.target.name]:e.target.value})
 
 }
 
-const validateField=(e: React.FocusEvent<HTMLInputElement, Element>)=>{
+const validateField=(e: React.FocusEvent<HTMLInputElement, Element> | React.FocusEvent<HTMLSelectElement, Element>)=>{
   if(e.target.name== 'email'){
     const check =e.target.value.includes('@')
     if(e.target.value.includes('@')){
@@ -67,6 +74,59 @@ const validateField=(e: React.FocusEvent<HTMLInputElement, Element>)=>{
       setErr({...err, first_name_err:true})
     }else{
       setErr({...err, first_name_err:false})
+    }
+  }
+  if(e.target.name == 'last_name'){
+    if(e.target.value.length < 3){
+      setErr({...err, last_name_err:true})
+    }else{
+      setErr({...err, last_name_err:false})
+    }
+  }
+
+  if(e.target.name == 'shippingAddress'){
+    if(e.target.value.length < 5){
+      setErr({...err, shippingAddress_err:true})
+    }else{
+      setErr({...err, shippingAddress_err:false})
+    }
+  }
+
+  if(e.target.name == 'province'){
+    if(e.target.value == ""){
+      setErr({...err, province_err:true})
+    }else{
+      setErr({...err, province_err:false})
+    }
+  }
+
+   if(e.target.name == 'city'){
+    if(e.target.value == ""){
+      setErr({...err, city_err:true})
+    }else{
+      setErr({...err, city_err:false})
+    }
+  }
+
+   if(e.target.name == 'area'){
+    if(e.target.value == ""){
+      setErr({...err, area_err:true})
+    }else{
+      setErr({...err, area_err:false})
+    }
+  }
+  if(e.target.name == 'zip_code'){
+    if(e.target.value == "" ||  e.target.value.length !== 5){
+      setErr({...err, zip_err:true})
+    }else{
+      setErr({...err, zip_err:false})
+    }
+  }
+  if(e.target.name == 'mobile_num'){
+    if(e.target.value == "" || e.target.value.length !== 11){
+      setErr({...err, mobile_num_err:true})
+    }else{
+      setErr({...err, mobile_num_err:false})
     }
   }
 }
@@ -87,50 +147,71 @@ const placeOrder =()=>{
   })
   if(checkErr && emptyStr){
     console.log('submitted form sucessfully')
+    dispatch(deleteAllCart())
+    setSuccessMsg(true)
+    
   }else{
-    console.log('show error')
+    setOrderErr(true)
   }
-
-  
-  
  
 }
-
+if(!successMsg && cartData.length == 0){
+  router.push('/')
+  return;
+}
   return (
     <div className={style.checkout_container}>
+    {!successMsg?  <>
         <div className={style.detail_box}>
         <form>
         <label className={style.heading} >Contact Information</label><br/>
         <input  className={style.full_input} value={customerInfo.email} type="email" placeholder='Email Address' id="constact" name="email" onChange={(e)=>changeCustomerInfo(e)} onBlur={(e)=>validateField(e)} /><br/>
         {err.email_err &&<p className={style.err_msg}>Invalid email address</p>}
         <div className={style.flex_box}>
-        <input className={style.name_input} value={customerInfo.first_name} type="text" placeholder='First Name' id="first_name" name="first_name" onChange={(e)=>changeCustomerInfo(e)} onBlur={(e)=>validateField(e)}/>
-        {/* {err.first_name_err &&<p>First name should be more than 3 letters</p>} */}
-        <input className={style.name_input} type="text" placeholder='Last Name' id="last_name" name="last_name"/>
+        <div className={style.name_input}>
+        <input value={customerInfo.first_name} type="text" placeholder='First Name' id="first_name" name="first_name" onChange={(e)=>changeCustomerInfo(e)} onBlur={(e)=>validateField(e)}/>
+        {err.first_name_err &&<p className={style.err_msg}>First name should be more than 3 letters</p>}
+        </div>
+        <div className={style.name_input} >
+        <input type="text" placeholder='Last Name' id="last_name" name="last_name" onChange={(e)=>changeCustomerInfo(e)} onBlur={(e)=>validateField(e)} />
+        {err.last_name_err &&<p className={style.err_msg}>Last name should be more than 3 letters</p>}
+        </div>
         </div>
         <label className={style.heading} >Shipping Address</label><br/>
-        <input className={style.full_input} type="text" placeholder='Street Address' id="constact" name="contact" /><br/>
+        <input className={style.full_input}value={customerInfo.shippingAddress} type="text" placeholder='Street Address' id="constact" name="shippingAddress" onChange={(e)=>changeCustomerInfo(e)} onBlur={(e)=>validateField(e)} /><br/>
+        {err.shippingAddress_err &&<p className={style.err_msg}>Address should be more than 5 letters</p>}
         <div className={style.flex_box}>
-        <select className={style.select_input}>
+        <div className={style.select_input}>
+        <select>
         <option value="Pakistan">Pakistan</option>
-        {/* <option value="India">India</option> */}
         </select>
-        <select className={style.select_input}>
+        </div>
+        <div className={style.select_input}>
+        <select  name='province' value={customerInfo.province} onChange={(e)=>changeCustomerInfo(e)} onBlur={(e)=>validateField(e)}>
+        <option value="">Select Province</option>
         <option value="sindh">Sindh</option>
         <option value="Punjab">Punjab</option>
         <option value="KPK">KPK</option>
         <option value="balochistan">Balochistan</option>
         </select>
+        {err.province_err &&<p className={style.err_msg}>Should select province</p>}
+        </div>
         </div>
         <div className={style.flex_box}>
-        <select className={style.select_input}>
+        <div className={style.select_input}>  
+        <select name='city' value={customerInfo.city} onChange={(e)=>changeCustomerInfo(e)} onBlur={(e)=>validateField(e)}>
+        <option value="">Select City</option>
         <option value="karachi">Karachi</option>
         <option value="islamabad">Islamabad</option>
         <option value="lahore">Lahore</option>
         <option value="peshawar">Peshawar</option>
         <option value="quetta">Quetta</option>
         </select>
-        <select className={style.select_input}>
+        {err.city_err &&<p className={style.err_msg}>Should select city name</p>}
+        </div>
+        <div className={style.select_input}>
+        <select  name='area' onChange={(e)=>changeCustomerInfo(e)} onBlur={(e)=>validateField(e)}>
+        <option value="">Select Area</option>
         <option value="sindh">Malir</option>
         <option value="Punjab">Gulshan-e-Iqbal</option>
         <option value="KPK">Nazimaabad</option>
@@ -139,10 +220,18 @@ const placeOrder =()=>{
         <option value="balochistan">Gulburg</option>
         <option value="balochistan">F.B Area</option>
         </select>
+         {err.area_err &&<p className={style.err_msg}>Should select area name</p>}
+         </div>
         </div>
         <div className={style.flex_box}>
-        <input className={style.name_input} placeholder='Zip Code' />
-        <input className={style.name_input} placeholder='Mobile Number' />
+        <div  className={style.name_input}>
+        <input type='number' maxLength={4} name='zip_code' placeholder='Zip Code' onChange={(e)=>changeCustomerInfo(e)} onBlur={(e)=>validateField(e)} />
+        {err.zip_err && <p className={style.err_msg}>Zip code is incorrect</p> }
+        </div>
+        <div className={style.name_input}>
+        <input type='number' maxLength={11} name='mobile_num' placeholder='Mobile Number' onChange={(e)=>changeCustomerInfo(e)} onBlur={(e)=>validateField(e)} />
+        {err.mobile_num_err && <p className={style.err_msg}>Mobile number is incorrect</p> }
+        </div>
         </div>
         <input className={style.check_box} type='checkbox' /><label>Create account</label><br/>
         <input checked={defaultAddress} onChange={()=>{setDefaultAddress(!defaultAddress)}} className={style.check_box} type='checkbox' /><label>My billing and shipping address are same</label>
@@ -261,7 +350,12 @@ const placeOrder =()=>{
           <p>Please Note: Land duty and taxes to be borne by customer</p>
           <p className={style.order_btn} onClick={()=>{placeOrder()}}>Place Order</p>
           </div>
+          {orderErr && <p className={style.err_msg} style={{textAlign:'center', marginTop:'20px'}}>Please submit all correct informations</p>}
         </div>
+        </>:<>
+        <p className={style.success_msg}>Congratulation! Your Order Place Successfully</p>
+        {/* <Link href="/"><p>Go to home</p></Link>  */}
+        </>}
         </div>
   )
 }
