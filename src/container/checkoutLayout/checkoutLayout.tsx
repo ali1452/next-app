@@ -155,10 +155,10 @@ const placeOrder =()=>{
   }
  
 }
-if(!successMsg && cartData.length == 0){
-  router.push('/')
+// if(!successMsg && cartData.length == 0){
+//   router.push('/')
   
-}
+// }
   return (
     <div className={style.checkout_container}>
     {!successMsg?  <>
