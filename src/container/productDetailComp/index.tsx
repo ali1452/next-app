@@ -58,9 +58,10 @@ setSelectedSize(e.target.value)
 }
 
   return (
-    <>
+    <div  className={style.main_container}>
     {loading && <Loader />}
-    {!loading && product && <div className={style.productDetail_container}>
+    {!loading && product && 
+    <div className={style.productDetail_container}>
       <p className={style.err}>{error}</p>
       <p className={style.product_heading}>Product Detail</p>
       <div className={style.product_card}>
@@ -93,7 +94,7 @@ setSelectedSize(e.target.value)
       </div>
       
       </div>}
-      </>
+      </div>
   )
 }
 

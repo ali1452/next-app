@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import style  from'./checkoutLayout.module.scss'
 import { Accordion, AccordionActions, AccordionDetails, AccordionSummary, Button } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -8,7 +8,6 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAllCart } from '@/redux/slice/cartSlice';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 
 const CheckoutLayout = () => {
 
@@ -45,6 +44,12 @@ const CheckoutLayout = () => {
   const dispatch = useDispatch()
   const cartData = selector.cart.cart
   const cartItems = cartData.length
+
+  useLayoutEffect(()=>{
+   if(!successMsg && cartData.length == 0){
+    router.push('/')
+   }
+  },[])
 
   const cartTotal =()=> {
   let totalAmt = 0
@@ -149,17 +154,18 @@ const placeOrder =()=>{
     console.log('submitted form sucessfully')
     dispatch(deleteAllCart())
     setSuccessMsg(true)
+    setTimeout(()=>{
+    router.push('/')
+    },1000)
     
   }else{
     setOrderErr(true)
   }
  
 }
-// if(!successMsg && cartData.length == 0){
-//   router.push('/')
-  
-// }
+
   return (
+    <div className={style.checkout_container_main}>
     <div className={style.checkout_container}>
     {!successMsg?  <>
         <div className={style.detail_box}>
@@ -356,6 +362,7 @@ const placeOrder =()=>{
         <p className={style.success_msg}>Congratulation! Your Order Place Successfully</p>
         {/* <Link href="/"><p>Go to home</p></Link>  */}
         </>}
+        </div>
         </div>
   )
 }

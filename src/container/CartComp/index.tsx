@@ -141,7 +141,7 @@ const CartComp = (props: Props) => {
     }
 
   return (
-  <>
+  <div className={style.cart_main_container}>
     {loading && <Loader  /> }
     
    {!loading && <div className={style.cart_container} >
@@ -237,7 +237,7 @@ const CartComp = (props: Props) => {
       :<p className={style.empty_cart}>Cart is Empty</p>}
       
     </div>}
-    </>
+    </div>
   )
 }
 
