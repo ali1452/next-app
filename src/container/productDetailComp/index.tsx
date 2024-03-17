@@ -1,11 +1,11 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { productData } from '../mainLayout/productdata'
 import style from './productDetail.module.scss'
 import Link from 'next/link'
 import Loader from '@/component/loader/loader'
 import { addCart,addItemQty } from '@/redux/slice/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { getProduct } from '@/services/userservices'
 
 type Props = {
   id:string,
@@ -17,16 +17,22 @@ const ProductDetail = ({id}: Props) => {
   const [loading, setLoading] = useState(true)
   const  [selectedSize,setSelectedSize] = useState('')
   const [error, setError] =useState('')
-  const productId = +id
-  const product=productData[productId-1]
   const dispatch = useDispatch()
   const selector = useSelector((item:any)=>item.cart)
 
+  const getData=async(id:any)=>{
+    const res = await getProduct(id)
+    if(res.status== 200){
+      setSelectedProduct(res.data[0])
+      setLoading(false)
+    }else{
+      setLoading(false)
+    }
+  }
+
   useEffect(()=>{
-    setSelectedProduct(product)
-    setLoading(false)
-    
-  },[product])
+    getData(id)
+  },[])
   
 const add_Cart_item =(value:any)=>{
   let added = true
@@ -58,9 +64,10 @@ setSelectedSize(e.target.value)
 }
 
   return (
-    <div  className={style.main_container}>
-    {loading && <Loader />}
-    {!loading && product && 
+    <>
+      {loading && <Loader />}
+      <div  className={style.main_container}>
+    {!loading && seletedProduct && 
     <div className={style.productDetail_container}>
       <p className={style.err}>{error}</p>
       <p className={style.product_heading}>Product Detail</p>
@@ -95,6 +102,8 @@ setSelectedSize(e.target.value)
       
       </div>}
       </div>
+      </>
+   
   )
 }
 
