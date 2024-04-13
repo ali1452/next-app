@@ -6,6 +6,7 @@ import Loader from '@/component/loader/loader'
 import { addCart,addItemQty } from '@/redux/slice/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProduct } from '@/services/userservices'
+import Rating from '@mui/material/Rating';
 
 type Props = {
   id:string,
@@ -68,6 +69,7 @@ setSelectedSize(e.target.value)
       {loading && <Loader />}
       <div  className={style.main_container}>
     {!loading && seletedProduct && 
+    <>
     <div className={style.productDetail_container}>
       <p className={style.err}>{error}</p>
       <p className={style.product_heading}>Product Detail</p>
@@ -100,7 +102,13 @@ setSelectedSize(e.target.value)
       </div>
       </div>
       
-      </div>}
+      
+      </div>
+      <div className={style.rating_container}>
+      <p className={style.rating_heading}>Product Rating</p>  
+      <Rating name="half-rating-read" defaultValue={4.5} precision={0.5} readOnly size="large" />
+      </div>
+      </>}
       </div>
       </>
    
