@@ -7,6 +7,8 @@ import { addCart,addItemQty } from '@/redux/slice/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProduct } from '@/services/userservices'
 import Rating from '@mui/material/Rating';
+import ProductSlider from '@/component/swiper/swiper'
+import { getAllProducts } from '@/services/userservices'
 
 type Props = {
   id:string,
@@ -15,6 +17,7 @@ type Props = {
 const ProductDetail = ({id}: Props) => {
 
   const[seletedProduct, setSelectedProduct] = useState<any>(null)
+  const [productData,setProductData] =useState([])
   const [loading, setLoading] = useState(true)
   const  [selectedSize,setSelectedSize] = useState('')
   const [error, setError] =useState('')
@@ -31,7 +34,18 @@ const ProductDetail = ({id}: Props) => {
     }
   }
 
+  const getProducts =async()=>{
+    const data = await getAllProducts()
+    if(data.status === 200){
+     setLoading(false)
+     setProductData(data.data)
+    }else{
+     setLoading(false)
+    }
+ }
+
   useEffect(()=>{
+    getProducts()
     getData(id)
   },[])
   
@@ -100,6 +114,7 @@ setSelectedSize(e.target.value)
       <p onClick={()=>add_Cart_item(seletedProduct)} className={style.add_cart_btn}>Add to Cart</p>
       <p  className={style.shop_btn}>Shop Now</p>
       </div>
+     
       </div>
       
       
@@ -108,6 +123,8 @@ setSelectedSize(e.target.value)
       <p className={style.rating_heading}>Product Rating</p>  
       <Rating name="half-rating-read" defaultValue={4.5} precision={0.5} readOnly size="large" />
       </div>
+      <p className={style.swiper_heading}>Product You May Like</p>
+      <ProductSlider productData={productData} />
       </>}
       </div>
       </>

@@ -6,7 +6,7 @@ type Props = {}
 function Loader({}: Props) {
   return (
     <div className={style.loader_container}>
-        <img src="./loaderImg.gif" alt="loading" />
+        <img src="/loaderImg.gif" alt="loading" />
     </div>
   )
 }
