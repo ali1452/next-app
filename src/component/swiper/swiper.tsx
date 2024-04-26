@@ -3,9 +3,8 @@ import { Navigation } from 'swiper/modules';
 import { Pagination } from 'swiper/modules';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
-
-// Import Swiper styles
 import 'swiper/css';
+import Link from 'next/link';
 
 type Iprops= {
   productData:any[]
@@ -17,7 +16,7 @@ const ProductSlider = ({productData}:Iprops) => {
     <div style={{maxWidth:'1050px'}}>
     <Swiper
       pagination={false}
-      navigation={true} 
+      navigation={false} 
       modules={[Navigation,Pagination]}
       spaceBetween={10}
       // slidesPerView={3}
@@ -25,7 +24,7 @@ const ProductSlider = ({productData}:Iprops) => {
       onSwiper={(swiper) => console.log(swiper)}
       breakpoints={{
         1: {
-          slidesPerView: 2,
+          slidesPerView: 2.3,
           spaceBetween: 20,
         },
         768: {
@@ -36,15 +35,17 @@ const ProductSlider = ({productData}:Iprops) => {
       }}
     >
       {productData && productData.length >0 && productData.map((item,index)=>{
-         const {url,name,price,sku,brand} = item
+         const {url,name,price,sku,brand,product_id} = item
         return(
           <SwiperSlide key ={index+1}>
+            <Link href={`/products/${product_id}`}>
             <div>
               <img src={`/${url}`} alt='image'  />
               <p>{name}</p>
               <p>{brand}</p>
               <p>{price}</p>
             </div>
+            </Link>
           </SwiperSlide>
         )
       })}
