@@ -9,6 +9,7 @@ import { getProduct } from '@/services/userservices'
 import Rating from '@mui/material/Rating';
 import ProductSlider from '@/component/swiper/swiper'
 import { getAllProducts } from '@/services/userservices'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   id:string,
@@ -23,6 +24,7 @@ const ProductDetail = ({id}: Props) => {
   const [error, setError] =useState('')
   const dispatch = useDispatch()
   const selector = useSelector((item:any)=>item.cart)
+  const router = useRouter()
 
   const getData=async(id:any)=>{
     const res = await getProduct(id)
@@ -74,6 +76,18 @@ const add_Cart_item =(value:any)=>{
  
 }
 
+const shopNow =(value:any)=>{
+if(selectedSize == ""){
+  setError('Please Select Size First.')
+}else{
+  setLoading(true)
+  add_Cart_item(value)
+  router.push('/checkout')
+  
+}
+
+}
+
 const selectOption=(e: any)=>{
 setSelectedSize(e.target.value)
 }
@@ -112,7 +126,7 @@ setSelectedSize(e.target.value)
       </span>
       <div className={style.btn_container}>
       <p onClick={()=>add_Cart_item(seletedProduct)} className={style.add_cart_btn}>Add to Cart</p>
-      <p  className={style.shop_btn}>Shop Now</p>
+      <p  className={style.shop_btn} onClick={()=>shopNow(seletedProduct)}>Shop Now</p>
       </div>
      
       </div>
@@ -120,7 +134,8 @@ setSelectedSize(e.target.value)
       
       </div>
       <div className={style.rating_container}>
-      <p className={style.rating_heading}>Product Rating</p>  
+      <p className={style.rating_heading}>Product Rating</p> 
+      <p>Hello</p>
       <Rating name="half-rating-read" defaultValue={4.5} precision={0.5} readOnly size="large" />
       </div>
       <p className={style.swiper_heading}>Product You May Like</p>
