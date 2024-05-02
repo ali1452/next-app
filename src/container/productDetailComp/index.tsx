@@ -28,7 +28,7 @@ const ProductDetail = ({id}: Props) => {
 
   const getData=async(id:any)=>{
     const res = await getProduct(id)
-    if(res.status== 200){
+    if(res?.status== 200){
       setSelectedProduct(res.data[0])
       setLoading(false)
     }else{
@@ -38,7 +38,7 @@ const ProductDetail = ({id}: Props) => {
 
   const getProducts =async()=>{
     const data = await getAllProducts()
-    if(data.status === 200){
+    if(data?.status === 200){
      setLoading(false)
      setProductData(data.data)
     }else{
