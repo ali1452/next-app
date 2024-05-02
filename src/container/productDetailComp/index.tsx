@@ -90,6 +90,7 @@ if(selectedSize == ""){
 
 const selectOption=(e: any)=>{
 setSelectedSize(e.target.value)
+setError('')
 }
 
   return (
@@ -99,7 +100,6 @@ setSelectedSize(e.target.value)
     {!loading && seletedProduct && 
     <>
     <div className={style.productDetail_container}>
-      <p className={style.err}>{error}</p>
       <p className={style.product_heading}>Product Detail</p>
       <div className={style.product_card}>
       <p className={style.product_name}>{seletedProduct.name}</p>
@@ -115,7 +115,6 @@ setSelectedSize(e.target.value)
                   <option key={size} value={size}>{size}</option>
                 )
               })} 
-          
         </select>
       </div>
       <p>Category: <span>{seletedProduct.category}</span></p>
@@ -127,11 +126,9 @@ setSelectedSize(e.target.value)
       <div className={style.btn_container}>
       <p onClick={()=>add_Cart_item(seletedProduct)} className={style.add_cart_btn}>Add to Cart</p>
       <p  className={style.shop_btn} onClick={()=>shopNow(seletedProduct)}>Shop Now</p>
+      <p className={style.err}>{error}</p>
       </div>
-     
       </div>
-      
-      
       </div>
       <div className={style.rating_container}>
       <p className={style.rating_heading}>Product Rating</p> 

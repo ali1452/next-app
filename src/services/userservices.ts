@@ -17,14 +17,24 @@ const bast_url ='https://express-project-smoky.vercel.app'
 //     await axios.delete(`${url}${id}`)
 // }
 const getAllProducts = async()=>{
-    const products = await axios.get(`${bast_url}/products`)
-    return products
+    try {
+        const products = await axios.get(`${bast_url}/products`)
+        return products    
+    } catch (error) {
+        console.log(error)
+    }
+    
 }
 
 const getProduct = async(id:any)=>{
-    const product = await axios.get(`${bast_url}/products/${id}`)
-    return product
-
+    try {
+        const product = await axios.get(`${bast_url}/products/${id}`)
+        return product
+        
+    } catch (error) {
+        console.log(error)
+    }
+    
 }
 
 

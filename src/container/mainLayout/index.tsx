@@ -11,13 +11,15 @@ import Loader from '@/component/loader/loader'
 const MainLayout = () => {
 const [productData,setProductData] = useState<any[]>([])
 const [loading,setLoading] = useState(true)
+const [err,setErr] =useState(false)
 
   const getProducts =async()=>{
      const data = await getAllProducts()
-     if(data.status === 200){
+     if(data?.status === 200){
       setLoading(false)
       setProductData(data.data)
      }else{
+      setErr(true)
       setLoading(false)
      }
   }
@@ -32,7 +34,7 @@ const [loading,setLoading] = useState(true)
      {loading && <Loader />}
      <div className={style.main_layout_container}>
      
-     {!loading && productData  &&  productData.length > 0 ?
+     {!loading && productData  &&  productData.length > 0 &&
      <>
      {productData.map((item,i)=>{
        const {url,name,price,sku} = item
@@ -54,8 +56,8 @@ const [loading,setLoading] = useState(true)
        )
      })}
      </>
-     
-     :<h1>No Product Avaialable</h1>}
+     }
+     {err && <h1 className={style.no_avail_div}>No Product Avaialable</h1>}
  </div>
     </>
    
