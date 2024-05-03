@@ -55,7 +55,7 @@ const CheckoutLayout = () => {
   let totalAmt = 0
   cartData.forEach((item:any)=>{
   const {price} = item
-  totalAmt += +price
+  totalAmt += +price*item.qty
   })
   return totalAmt
 }
@@ -346,7 +346,7 @@ const placeOrder =()=>{
         <div className={style.order_qty}key={index+'item'}>
          <p className={style.flex_one}>{name}</p>
          <p className={style.flex_one}>{qty}</p>
-         <p className={style.flex_one}>Rs.{price}</p>
+         <p className={style.flex_one}>Rs.{price*qty}</p>
         </div>
           )
           

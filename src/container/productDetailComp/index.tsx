@@ -10,6 +10,7 @@ import Rating from '@mui/material/Rating';
 import ProductSlider from '@/component/swiper/swiper'
 import { getAllProducts } from '@/services/userservices'
 import { useRouter } from 'next/navigation'
+import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 
 type Props = {
   id:string,
@@ -132,7 +133,6 @@ setError('')
       </div>
       <div className={style.rating_container}>
       <p className={style.rating_heading}>Product Rating</p> 
-      <p>Hello</p>
       <Rating name="half-rating-read" defaultValue={4.5} precision={0.5} readOnly size="large" />
       </div>
       <p className={style.swiper_heading}>Product You May Like</p>
