@@ -1,17 +1,8 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './search-box.module.scss'
 import { getAllProducts } from '@/services/userservices';
@@ -65,7 +56,6 @@ const SearchBox = (props: Props) => {
         if(key_words !==""){
           const  selectedItems = product.filter((item:any)=>{
             if(item.name.toLowerCase().includes(key_words)){
-              console.log(item)
               return item
   
             }
@@ -92,8 +82,8 @@ const SearchBox = (props: Props) => {
         <div style={{display:'flex', flexWrap:'wrap', justifyContent:'center'}}>
           {selectedProduct.map((item:any, index:number) => {
             return(
-            <Link href={`/products/${item.product_id}`} onClick={()=>setState({...state,top:false})}>
-            <div key={item} style={{padding:'10px'}}>
+            <Link key={index+"search"} href={`/products/${item.product_id}`} onClick={()=>setState({...state,top:false})}>
+            <div  style={{padding:'10px'}}>
               <p>
                 <img src={`../${item.url}`} alt='image' />
               </p>
