@@ -13,19 +13,27 @@
         font-size: 14px;
     }
 
-    .cart_icon{
-        position: relative;
-        cursor: pointer;
-        margin-right: 10px;
-
-        .count{
-            position: absolute;
-            font-size: 10px;
-            background-color: black;
-            right: -10px;
-            top:  -10px;
-            border-radius: 15px;
-            padding: 3px 7px;
+    .icon_wrap{
+        display: flex;
+        gap: 10px;
+        .cart_icon{
+            position: relative;
+            cursor: pointer;
+            margin-right: 10px;
+    
+            .count{
+                position: absolute;
+                font-size: 10px;
+                background-color: black;
+                right: -10px;
+                top:  -10px;
+                border-radius: 15px;
+                padding: 3px 7px;
+            }
+        }
+        .search_icon {
+            cursor: pointer;
         }
     }
+
 }
