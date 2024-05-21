@@ -73,11 +73,11 @@ const SearchBox = (props: Props) => {
         role="presentation"
         // onClick={toggleDrawer(anchor, false)}
         // onKeyDown={toggleDrawer(anchor, false)}
-        style={{marginTop:'4%'}}
+        style={{marginTop:'60px'}}
       >
         <>
         <p style={{margin:'10px'}}>
-          <input  value={search} className={styles.search_input} type='text' onChange={(e)=>searchProduct(e)} />
+          <input placeholder='Search Product' value={search} className={styles.search_input} type='text' onChange={(e)=>searchProduct(e)} />
         </p>
         <div style={{display:'flex', flexWrap:'wrap', justifyContent:'center'}}>
           {selectedProduct.map((item:any, index:number) => {
