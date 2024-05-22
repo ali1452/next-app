@@ -8,14 +8,29 @@
     position: fixed;
     width: -webkit-fill-available;
     z-index: 9999;
+    align-items: center;
 
     @media (max-width:767px) {
         font-size: 14px;
     }
 
+    .header_text {
+        width: auto;
+        @media (max-width:767px) {
+            width: 150px;
+            text-align: end;    
+        }
+        
+    }
+
     .icon_wrap{
         display: flex;
         gap: 10px;
+        align-items: center;
+
+        @media (max-width:767px) {
+            gap: 0px;
+        }
         .cart_icon{
             position: relative;
             cursor: pointer;

@@ -50,9 +50,9 @@ const SearchBox = (props: Props) => {
         setState({ ...state, [anchor]: open });
       };
 
-      const searchProduct =(e: { target: { value: React.SetStateAction<string>; }; })=>{
+      const searchProduct =(e: React.ChangeEvent<HTMLInputElement>)=>{
         setSearch(e.target.value)
-        const key_words = e.target.value
+        const key_words = (e.target.value).toLowerCase()
         if(key_words !==""){
           const  selectedItems = product.filter((item:any)=>{
             if(item.name.toLowerCase().includes(key_words)){
@@ -79,7 +79,9 @@ const SearchBox = (props: Props) => {
         <p style={{margin:'10px'}}>
           <input placeholder='Search Product' value={search} className={styles.search_input} type='text' onChange={(e)=>searchProduct(e)} />
         </p>
+        {selectedProduct.length > 0 && <p style={{fontSize:'24px', marginLeft:'10px'}}>{`Total search product ${selectedProduct.length}`}</p>}
         <div style={{display:'flex', flexWrap:'wrap', justifyContent:'center'}}>
+          
           {selectedProduct.map((item:any, index:number) => {
             return(
             <Link key={index+"search"} href={`/products/${item.product_id}`} onClick={()=>setState({...state,top:false})}>
