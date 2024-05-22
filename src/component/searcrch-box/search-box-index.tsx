@@ -46,7 +46,8 @@ const SearchBox = (props: Props) => {
         ) {
           return;
         }
-  
+        setSearch('')
+        setSelectedProduct([])
         setState({ ...state, [anchor]: open });
       };
 
@@ -71,27 +72,26 @@ const SearchBox = (props: Props) => {
     const list = (anchor: Anchor,styles: { readonly [x: string]: string; search_input?: any; }) => (
       <div
         role="presentation"
-        // onClick={toggleDrawer(anchor, false)}
-        // onKeyDown={toggleDrawer(anchor, false)}
-        style={{marginTop:'60px'}}
+        className={styles.list_container}
       >
         <>
-        <p style={{margin:'10px'}}>
+        <p className={styles.search_wrap}>
           <input placeholder='Search Product' value={search} className={styles.search_input} type='text' onChange={(e)=>searchProduct(e)} />
         </p>
-        {selectedProduct.length > 0 && <p style={{fontSize:'24px', marginLeft:'10px'}}>{`Total search product ${selectedProduct.length}`}</p>}
-        <div style={{display:'flex', flexWrap:'wrap', justifyContent:'center'}}>
-          
+        {selectedProduct.length > 0 && <p className={styles.search_text}>{`Total search product ${selectedProduct.length}`}</p>}
+        <div className={styles.prouduct_wrap}>
           {selectedProduct.map((item:any, index:number) => {
             return(
-            <Link key={index+"search"} href={`/products/${item.product_id}`} onClick={()=>setState({...state,top:false})}>
-            <div  style={{padding:'10px'}}>
+            <div key={index+"search"} style={{maxWidth:'48%'}}>
+            <Link href={`/products/${item.product_id}`} onClick={()=>setState({...state,top:false})}>
+            <div className={styles.detail} >
               <p>
                 <img src={`../${item.url}`} alt='image' />
               </p>
               <p>{item.name}</p>
             </div>
             </Link>
+            </div>
             )
             
             })}
