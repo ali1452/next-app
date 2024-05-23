@@ -24,11 +24,14 @@ const SearchBox = (props: Props) => {
 
       const [search, setSearch] =useState('')
       const [selectedProduct,setSelectedProduct] = useState([])
+      const [isLoading,setIsloading] = useState(true)
 
       const fetchProduct = async()=>{
         const res = await getAllProducts()
         if(res?.status == 200){
             setProduct(res.data)
+            setIsloading(false)
+
         }
        
       }
@@ -99,10 +102,13 @@ const SearchBox = (props: Props) => {
         </>
       </div>
     );
+
+    if(isLoading){
+      return null
+    }
   
   return (
-    <>
-    <div className={styles.search_container}>
+<div className={styles.search_container}>
 
           {(['top'] as const).map((anchor) => (
             
@@ -118,7 +124,6 @@ const SearchBox = (props: Props) => {
         </React.Fragment>
       ))}
     </div>
-    </>
   )
 }
 

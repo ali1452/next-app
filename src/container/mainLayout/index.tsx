@@ -1,40 +1,18 @@
-'use client'
-
-import React, { useEffect, useState } from 'react'
+// 'use client'
+import React from 'react'
 import  style from './mainLayout.module.scss'
-import { productData } from './productdata'
-import Image from 'next/image'
 import Link from 'next/link'
-import { getAllProducts } from '@/services/userservices'
-import Loader from '@/component/loader/loader'
 
-const MainLayout = () => {
-const [productData,setProductData] = useState<any[]>([])
-const [loading,setLoading] = useState(true)
-const [err,setErr] =useState(false)
+type IProps = {
+  productData:any[]
+}
+const MainLayout = ({productData}:IProps) => {
 
-  const getProducts =async()=>{
-     const data = await getAllProducts()
-     if(data?.status === 200){
-      setLoading(false)
-      setProductData(data.data)
-     }else{
-      setErr(true)
-      setLoading(false)
-     }
-  }
-
-  useEffect(()=>{
-    getProducts()
-  },[])
-
- 
   return (
     <>
-     {loading && <Loader />}
      <div className={style.main_layout_container}>
      
-     {!loading && productData  &&  productData.length > 0 &&
+     { productData  &&  productData.length > 0 ?
      <>
      {productData.map((item,i)=>{
        const {url,name,price,sku} = item
@@ -55,10 +33,9 @@ const [err,setErr] =useState(false)
          </div>
        )
      })}
-     </>
+     </>:<h1 className={style.no_avail_div}>No Product Avaialable</h1>
      }
-     {err && <h1 className={style.no_avail_div}>No Product Avaialable</h1>}
- </div>
+     </div>
     </>
    
   )
