@@ -1,0 +1,19 @@
+.pagination_container {
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+
+    li{
+        padding: 0px  10px;
+        border:1px solid #fff;
+        color: #fff;
+    }
+
+    .active_page{
+        background-color: #e9dccd;
+        color: #000;
+    }
+}

@@ -1,13 +1,13 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './header.module.scss'
 import Link from 'next/link'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import SearchIcon from '@mui/icons-material/Search';
 import { useSelector } from 'react-redux';
 import SearchBox from '../searcrch-box/search-box-index';
 
 const Header = () => {
+  const [loading,setLoading]  = useState(true)
   const count= useSelector((item:any)=>item.cart.cart)
   let total_item = 0
   const calc_cartItem =(num:Number)=>{
@@ -15,6 +15,11 @@ const Header = () => {
     return  total_item
   }
   calc_cartItem(total_item)
+  useEffect(()=>{setLoading(false)},[])
+
+  if(loading){
+    return null
+  }
 
   return (
     <div className={style.header_container}>

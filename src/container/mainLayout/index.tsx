@@ -1,12 +1,14 @@
-// 'use client'
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import  style from './mainLayout.module.scss'
 import Link from 'next/link'
+import PaginatedItems from '@/component/pagination/paginaton'
 
 type IProps = {
   productData:any[]
 }
 const MainLayout = ({productData}:IProps) => {
+  const [selectedPage, setSelectedPage] = useState(1)
 
   return (
     <>
@@ -14,7 +16,7 @@ const MainLayout = ({productData}:IProps) => {
      
      { productData  &&  productData.length > 0 ?
      <>
-     {productData.map((item,i)=>{
+     {productData.slice((selectedPage-1)*10,selectedPage*10).map((item,i)=>{
        const {url,name,price,sku} = item
        return(
          <div key={"product" + i} className={style.card}>
@@ -33,9 +35,12 @@ const MainLayout = ({productData}:IProps) => {
          </div>
        )
      })}
+     
      </>:<h1 className={style.no_avail_div}>No Product Avaialable</h1>
      }
+    
      </div>
+     {productData.length > 10 ? <PaginatedItems itemsPerPage={10} items={productData}  setSelectedPage={(val:number)=> setSelectedPage(val)} />:""}
     </>
    
   )

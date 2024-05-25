@@ -7,10 +7,11 @@ import 'swiper/css';
 import Link from 'next/link';
 
 type Iprops= {
-  productData:any[]
+  productData:any[],
+  category:string
 }
 
-const ProductSlider = ({productData}:Iprops) => {
+const ProductSlider = ({productData, category}:Iprops) => {
 
   return (
     <div style={{maxWidth:'1050px'}}>
@@ -36,18 +37,20 @@ const ProductSlider = ({productData}:Iprops) => {
     >
       {productData && productData.length >0 && productData.map((item,index)=>{
          const {url,name,price,sku,brand,product_id} = item
-        return(
-          <SwiperSlide key ={index+1}>
-            <Link href={`/products/${product_id}`}>
-            <div>
-              <img src={`/${url}`} alt='image'  />
-              <p>{name}</p>
-              <p>{brand}</p>
-              <p>{price}</p>
-            </div>
-            </Link>
-          </SwiperSlide>
-        )
+        if(category == item.category){
+          return(
+            <SwiperSlide key ={index+1}>
+              <Link href={`/products/${product_id}`}>
+              <div>
+                <img src={`/${url}`} alt='image'  />
+                <p>{name}</p>
+                <p>{brand}</p>
+                <p>{price}</p>
+              </div>
+              </Link>
+            </SwiperSlide>
+          )
+        }
       })}
     </Swiper>
     </div>

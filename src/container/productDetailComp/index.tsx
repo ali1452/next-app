@@ -136,7 +136,7 @@ setError('')
       <Rating name="half-rating-read" defaultValue={4.5} precision={0.5} readOnly size="large" />
       </div>
       <p className={style.swiper_heading}>Product You May Like</p>
-      <ProductSlider productData={productData} />
+      <ProductSlider productData={productData} category={seletedProduct.category} />
       </>}
       </div>
       </>
