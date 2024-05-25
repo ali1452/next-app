@@ -36,7 +36,7 @@ const MainLayout = ({productData}:IProps) => {
        )
      })}
      
-     </>:<h1 className={style.no_avail_div}>No Product Avaialable</h1>
+     </>:<h1 className={style.no_avail_div}>No Product Available</h1>
      }
     
      </div>
