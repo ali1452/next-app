@@ -1,6 +1,5 @@
 import axios from "axios"
 
-// const url = `http://localhost:5000/user/`
 const bast_url ='https://express-project-smoky.vercel.app'
 
 // const fetchAllUsers =async()=>{

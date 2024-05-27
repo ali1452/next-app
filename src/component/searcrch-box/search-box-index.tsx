@@ -5,16 +5,16 @@ import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './search-box.module.scss'
-import { getAllProducts } from '@/services/userservices';
 import Link from 'next/link';
-
+import { useAppSelector } from '@/redux/hook/hook';
 
 type Props = {}
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 const SearchBox = (props: Props) => {
-    const [product,setProduct] = useState([])
+  const productState = useAppSelector(item=>item.product.product)
+    const [product,setProduct] = useState<any[]>([])
     const [state, setState] = useState({
         top: false,
         left: false,
@@ -23,17 +23,12 @@ const SearchBox = (props: Props) => {
       });
 
       const [search, setSearch] =useState('')
-      const [selectedProduct,setSelectedProduct] = useState([])
+      const [selectedProduct,setSelectedProduct] = useState<any[]>([])
       const [isLoading,setIsloading] = useState(true)
 
-      const fetchProduct = async()=>{
-        const res = await getAllProducts()
-        if(res?.status == 200){
-            setProduct(res.data)
-            setIsloading(false)
-
-        }
-       
+      const fetchProduct = ()=>{
+        setProduct(productState)
+        setIsloading(false)
       }
 
       useEffect(()=>{
@@ -88,7 +83,7 @@ const SearchBox = (props: Props) => {
             <div key={index+"search"} style={{maxWidth:'48%'}}>
             <Link href={`/products/${item.product_id}`} onClick={()=>setState({...state,top:false})}>
             <div className={styles.detail} >
-              <p>
+              <p className={styles.image_box}>
                 <img src={`../${item.url}`} alt='image' />
               </p>
               <p>{item.name}</p>

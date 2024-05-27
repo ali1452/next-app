@@ -1,16 +1,13 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import style from './productDetail.module.scss'
-import Link from 'next/link'
 import Loader from '@/component/loader/loader'
 import { addCart,addItemQty } from '@/redux/slice/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProduct } from '@/services/userservices'
 import Rating from '@mui/material/Rating';
 import ProductSlider from '@/component/swiper/swiper'
-import { getAllProducts } from '@/services/userservices'
 import { useRouter } from 'next/navigation'
-import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 
 type Props = {
   id:string,
@@ -25,6 +22,7 @@ const ProductDetail = ({id}: Props) => {
   const [error, setError] =useState('')
   const dispatch = useDispatch()
   const selector = useSelector((item:any)=>item.cart)
+  const products = useSelector((item:any)=>item.product.product)
   const router = useRouter()
 
   const getData=async(id:any)=>{
@@ -37,14 +35,9 @@ const ProductDetail = ({id}: Props) => {
     }
   }
 
-  const getProducts =async()=>{
-    const data = await getAllProducts()
-    if(data?.status === 200){
-     setLoading(false)
-     setProductData(data.data)
-    }else{
-     setLoading(false)
-    }
+  const getProducts = () =>{
+    setProductData(products)
+   
  }
 
   useEffect(()=>{
@@ -96,8 +89,9 @@ setError('')
 
   return (
     <>
+     
       {loading && <Loader />}
-      <div  className={style.main_container}>
+    <div  className={style.main_container}>
     {!loading && seletedProduct && 
     <>
     <div className={style.productDetail_container}>

@@ -1,14 +1,21 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import  style from './mainLayout.module.scss'
 import Link from 'next/link'
 import PaginatedItems from '@/component/pagination/paginaton'
+import { useAppDispatch } from '@/redux/hook/hook'
+import { addproduct } from '@/redux/slice/productSlice'
 
 type IProps = {
   productData:any[]
 }
 const MainLayout = ({productData}:IProps) => {
   const [selectedPage, setSelectedPage] = useState(1)
+  const dispatch = useAppDispatch()
+
+  useEffect(()=>{
+    dispatch(addproduct(productData))
+  },[])
 
   return (
     <>
