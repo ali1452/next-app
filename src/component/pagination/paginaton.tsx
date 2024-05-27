@@ -4,18 +4,6 @@ import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import styles from './pagination.module.scss'
 
-// function Items({ currentItems }) {
-//   return (
-//     <>
-//       {currentItems &&
-//         currentItems.map((item) => (
-//           <div>
-//             <h3>Item #{item}</h3>
-//           </div>
-//         ))}
-//     </>
-//   );
-// }
 type IProps= {
     itemsPerPage:number,
     items:any[],
@@ -55,7 +43,7 @@ function PaginatedItems({ itemsPerPage,items,setSelectedPage }:IProps) {
         pageCount={pageCount}
         previousLabel="<"
         renderOnZeroPageCount={null}
-        className={styles.pagination_container}
+        containerClassName ={styles.pagination_container}
         activeClassName={styles.active_page}
       />
     </>
