@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Autoplay, Navigation } from 'swiper/modules';
 import { Pagination } from 'swiper/modules';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
@@ -18,9 +18,13 @@ const ProductSlider = ({productData, category}:Iprops) => {
     <Swiper
       pagination={false}
       navigation={false} 
-      modules={[Navigation,Pagination]}
+      modules={[Autoplay, Navigation,Pagination]}
       spaceBetween={10}
-      // slidesPerView={3}
+      slidesPerView={'auto'}
+      autoplay={{
+        delay: 1500,
+      }}
+      loop={true}
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
       breakpoints={{
