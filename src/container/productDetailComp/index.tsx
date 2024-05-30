@@ -99,7 +99,7 @@ setError('')
       <div className={style.product_card}>
       <p className={style.product_name}>{seletedProduct.name}</p>
       <span className={style.img_container}>
-      <img src={`/${seletedProduct.url}`} width='500px' height='auto' />
+      <img src={`https://res.cloudinary.com/dpnza2tuy/image/upload/v1717048876/${seletedProduct.url}`} width='500px' height='auto' />
       <div>
       <div  className={style.size_container}>
       Size:  

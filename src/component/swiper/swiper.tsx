@@ -46,7 +46,7 @@ const ProductSlider = ({productData, category}:Iprops) => {
             <SwiperSlide key ={index+1}>
               <Link href={`/products/${product_id}`}>
               <div>
-                <img src={`/${url}`} alt='image'  />
+                <img src={`https://res.cloudinary.com/dpnza2tuy/image/upload/v1717048876/${url}`} alt='image'  />
                 <p>{name}</p>
                 <p>{brand}</p>
                 <p>{price}</p>

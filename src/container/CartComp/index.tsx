@@ -165,7 +165,8 @@ const CartComp = (props: Props) => {
 <tr  key={index+1}>
      <td className={style.item_container}>
       <div>
-      <p style={{width:'120px'}}><img src={item.url} /></p>
+      
+      <p style={{width:'120px'}}><img src={`https://res.cloudinary.com/dpnza2tuy/image/upload/v1717048876/${item.url}`} /></p>
       </div>
       <div className={style.detail_box}>
       <p className={style.bold_text}>{item.name}</p>
