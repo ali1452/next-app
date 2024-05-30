@@ -9,9 +9,11 @@ import { addproduct } from '@/redux/slice/productSlice'
 type IProps = {
   productData:any[]
 }
+
 const MainLayout = ({productData}:IProps) => {
   const [selectedPage, setSelectedPage] = useState(1)
   const dispatch = useAppDispatch()
+
 
   useEffect(()=>{
     dispatch(addproduct(productData))
@@ -27,7 +29,7 @@ const MainLayout = ({productData}:IProps) => {
        const {url,name,price,sku} = item
        return(
          <div key={"product" + i} className={style.card}>
-         <Link href={`/products/${item.product_id}`}><img src={url} alt='Product Image' width='400px' height='500px' /></Link>
+         <Link href={`/products/${item.product_id}`}><img src={`https://res.cloudinary.com/dpnza2tuy/image/upload/v1717048876/${url}`} alt='Product Image' width='400px' height='500px' /></Link>
          <p className={style.product_name}>{name}</p>
          <p className={style.price}>Rs.{price}</p>
          <span className={style.sku}>
