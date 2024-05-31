@@ -1,6 +1,7 @@
 import axios from "axios"
+import Gconfig  from "@/globalConfig"
 
-const bast_url ='https://express-project-smoky.vercel.app'
+const bast_url = Gconfig.api_url
 
 // const fetchAllUsers =async()=>{
 //     const users = await axios.get(url)

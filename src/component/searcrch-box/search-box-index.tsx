@@ -7,10 +7,13 @@ import SearchIcon from '@mui/icons-material/Search';
 import styles from './search-box.module.scss'
 import Link from 'next/link';
 import { useAppSelector } from '@/redux/hook/hook';
+import Gconfig  from "@/globalConfig"
 
 type Props = {}
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
+
+const imag_url = Gconfig.image_url
 
 const SearchBox = (props: Props) => {
   const productState = useAppSelector(item=>item.product.product)
@@ -84,7 +87,7 @@ const SearchBox = (props: Props) => {
             <Link href={`/products/${item.product_id}`} onClick={()=>setState({...state,top:false})}>
             <div className={styles.detail} >
               <p className={styles.image_box}>
-                <img src={`../${item.url}`} alt='image' />
+                <img src={imag_url+item.url} alt='image' />
               </p>
               <p>{item.name}</p>
             </div>
