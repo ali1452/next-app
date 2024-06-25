@@ -317,6 +317,7 @@ const placeOrder =()=>{
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3-content"
           id="panel3-header"
+          classes={{root:style.accordionMUI}}
         >
           {cartItems} Item in Cart
         </AccordionSummary>
@@ -337,7 +338,7 @@ const placeOrder =()=>{
       </Accordion>
       <div className={style.order_detail}>
          <p className={style.flex_one}>Product Name</p>
-         <p className={style.flex_one}>QTY</p>
+         <p className={style.flex_one_center}>QTY</p>
          <p className={style.flex_one}>Subtotal</p>
         </div>
         {cartData && cartData.length >0 && cartData?.map((item:any, index:number)=>{
@@ -345,7 +346,7 @@ const placeOrder =()=>{
           return(
         <div className={style.order_qty}key={index+'item'}>
          <p className={style.flex_one}>{name}</p>
-         <p className={style.flex_one}>{qty}</p>
+         <p className={style.flex_one_center}>{qty}</p>
          <p className={style.flex_one}>Rs.{price*qty}</p>
         </div>
           )

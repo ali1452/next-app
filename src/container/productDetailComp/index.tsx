@@ -8,6 +8,7 @@ import { getProduct } from '@/services/userservices'
 import Rating from '@mui/material/Rating';
 import ProductSlider from '@/component/swiper/swiper'
 import { useRouter } from 'next/navigation'
+import { showCartPopover } from '@/redux/slice/popoverSlice'
 
 type Props = {
   id:string,
@@ -56,12 +57,15 @@ const add_Cart_item =(value:any)=>{
   if((item.product_id == tempVal.product_id) && (item.size == tempVal.size)){
     if(stateItem[index].qty < 5){
       dispatch(addItemQty(index))
+      dispatch(showCartPopover(true))
+     
     }
     added = false
   }
     })
     if(added){
       dispatch(addCart(tempVal))
+     
     }
 
   }else{

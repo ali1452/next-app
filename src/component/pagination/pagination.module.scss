@@ -1,6 +1,6 @@
 .pagination_container {
-    background-color: #000;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -9,12 +9,12 @@
 
     li{
         padding: 0px  10px;
-        border:1px solid #fff;
-        color: #fff;
+        border:1px solid #000;
+        color: #000;
     }
 
     .active_page{
-        background-color: #e9dccd;
-        color: #000;
+        background-color: blueviolet;
+        color: #fff;
     }
 }

@@ -1,7 +1,16 @@
 
 .checkout_container_main{
     padding-top: 70px;
-    margin-bottom: 18vh;
+    min-height: 100vh;
+
+    .accordionMUI{
+        background-color: blueviolet;
+        color: #fff;
+
+        svg{
+            color: #fff;
+        }
+    }
     .checkout_container{
         display: flex;
         width: 100%;
@@ -128,6 +137,11 @@
     
             .flex_one {
                 flex: 1;
+            }
+
+            .flex_one_center {
+                flex: 1;
+                text-align: center;
             }
     
             .place_order{
