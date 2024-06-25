@@ -1,10 +1,10 @@
 .main_layout_container{
     display: flex;
     flex-wrap: wrap;
-    color: #fff;
+    color: #000;
     justify-content:center;
     padding: 10px 36px;
-    background-color: black;
+    background-color: #fff;
 
     @media (max-width:767px) {
         padding: 0px;

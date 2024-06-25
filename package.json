@@ -24,6 +24,7 @@
     "react-dom": "^18",
     "react-paginate": "^8.2.0",
     "react-redux": "^9.0.4",
+    "react-scroll-motion": "^0.3.3",
     "redux": "^5.0.0",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^3.1.0",
