@@ -12,23 +12,23 @@ let  Gconfig:GconfigType = {
     image_url:'',
     environment:''
 }
-const API_URL = "https://express-project-smoky.vercel.app"
-const IMAGE_URL = "https://res.cloudinary.com/dpnza2tuy/image/upload/v1717048876/"
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+const IMAGE_URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL
 
 
 
 if(Environment == 'development'){
      Gconfig = {
-        api_url:API_URL,
-        image_url:IMAGE_URL,
+        api_url:API_URL|| '',
+        image_url:IMAGE_URL|| '',
         environment:Environment
     }
 }
 
 if(Environment == 'production'){
     Gconfig = {
-       api_url:API_URL,
-       image_url:IMAGE_URL,
+       api_url:API_URL|| '',
+       image_url:IMAGE_URL|| '',
        environment:Environment
    }
 }

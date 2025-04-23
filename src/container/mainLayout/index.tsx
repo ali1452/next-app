@@ -19,6 +19,7 @@ const MainLayout = ({productData}:IProps) => {
     dispatch(addproduct(productData))
   },[])
 
+
   return (
     <>
      <div className={style.main_layout_container}>
@@ -29,7 +30,7 @@ const MainLayout = ({productData}:IProps) => {
        const {url,name,price,sku} = item
        return(
          <div key={"product" + i} className={style.card}>
-         <Link href={`/products/${item.product_id}`}><img src={`https://res.cloudinary.com/dpnza2tuy/image/upload/v1717048876/${url}`} alt='Product Image' width='400px' height='500px' /></Link>
+         <Link href={`/products/${item.product_id}`}><img src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${url}`} alt='Product Image' width='400px' height='500px' /></Link>
          <p className={style.product_name}>{name}</p>
          <p className={style.price}>Rs.{price}</p>
          <span className={style.sku}>
