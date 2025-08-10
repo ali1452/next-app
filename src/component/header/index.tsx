@@ -42,6 +42,7 @@ const Header = () => {
   return (
     <div className={style.header_container}>
          <Link href='/'><p>M&B</p></Link>
+         <Link href='/about'><p>About</p></Link>
         <p className={style.header_text}>All Your Fashion Needs</p>
         <div className={style.icon_wrap} >
         <p className={style.search_icon}>
