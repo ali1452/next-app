@@ -15,7 +15,8 @@
     }
 
     .header_text {
-        width: auto;
+        width: 100%;
+        text-align: center;
         @media (max-width:767px) {
             width: 150px;
             text-align: end;    
