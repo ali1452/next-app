@@ -138,7 +138,7 @@ setError('')
         {!loading && data && (
           <>
             {/* Breadcrumb */}
-            <div className="pt-24 md:pt-20 pb-8">
+            <div className="pt-28 sm:pt-24 md:pt-20 pb-8">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <nav className="text-sm breadcrumbs">
                   <ol className="flex items-center space-x-2 text-gray-500">
@@ -263,7 +263,7 @@ setError('')
 
                   {/* Pricing */}
                   <div className="bg-gradient-to-r from-violet-50 to-purple-50 rounded-2xl p-6 border border-violet-100">
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center flex-wrap gap-4">
                       <span className="text-4xl font-bold text-gray-900">
                         Rs.{data.price}
                       </span>
@@ -381,7 +381,7 @@ setError('')
               <div className="bg-white rounded-2xl shadow-lg p-8">
                 <div className="text-center mb-8">
                   <h2 className="text-3xl font-bold text-gray-900 mb-4">Customer Reviews</h2>
-                  <div className="flex items-center justify-center space-x-4">
+                  <div className="flex items-center justify-center flex-wrap gap-4">
                     <Rating 
                       value={4.5} 
                       precision={0.5} 

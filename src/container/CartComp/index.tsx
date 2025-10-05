@@ -364,19 +364,19 @@ const CartComp = (props: Props) => {
                       Promo Code
                     </h3>
                     <div className="space-y-4">
-                      <div className="flex space-x-2">
+                      <div className="flex flex-wrap gap-3 flex-col">
                         <input
                           disabled={applyCode}
                           value={discountCode}
                           onChange={(e) => setDiscountCode(e.target.value.trim().toLowerCase())}
                           type="text"
                           placeholder="Enter promo code"
-                          className="flex-1 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 disabled:bg-gray-100"
+                          className="flex-1 w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 disabled:bg-gray-100"
                         />
                         <button
                           disabled={applyCode}
                           onClick={applyDiscount}
-                          className="bg-violet-600 text-white px-6 py-3 rounded-lg hover:bg-violet-700 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="bg-violet-600 text-white px-6 py-3 flex-1 w-full rounded-lg hover:bg-violet-700 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           Apply
                         </button>

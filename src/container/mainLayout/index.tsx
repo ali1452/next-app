@@ -19,7 +19,7 @@ const HomeLayout = (props: Props) => {
 
   const heroSlides = [
     {
-      title: "Summer Collection 2024",
+      title: "Summer Collection 2025",
       subtitle: "Discover Your Style",
       description: "Explore our latest summer fashion collection with trendy designs and premium quality.",
       image: "https://res.cloudinary.com/dpnza2tuy/image/upload/v1717048876/fashion-hero-1.jpg",
@@ -80,19 +80,19 @@ const HomeLayout = (props: Props) => {
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
+      name: "Sarah Ahmed",
       rating: 5,
       text: "Amazing quality and fast shipping! Love my new wardrobe pieces.",
       avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
     },
     {
-      name: "Mike Chen",
+      name: "Yousuf Naeem",
       rating: 5,
       text: "Great customer service and trendy styles. Highly recommend!",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
     },
     {
-      name: "Emma Davis",
+      name: "Nimra Khan",
       rating: 5,
       text: "Perfect fit and beautiful designs. My go-to fashion store!",
       avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"

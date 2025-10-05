@@ -91,7 +91,7 @@ export default function AboutPage() {
                   </div>
                   <div className="flex items-center space-x-4">
                     <div className="w-3 h-3 bg-white rounded-full"></div>
-                    <span className="text-lg">2024 - 500K+ happy customers</span>
+                    <span className="text-lg">2025 - 500K+ happy customers</span>
                   </div>
                 </div>
               </div>

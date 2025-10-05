@@ -31,57 +31,73 @@ const ProductSlider = ({productData, category}:Iprops) => {
   }
 
   return (
-    <div className="relative max-w-7xl mx-auto px-4">
+    <div className="relative max-w-7xl mx-auto px-4 overflow-hidden">
       {/* Custom Navigation Buttons */}
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-center mb-6 md:mb-8">
         <div>
-          <h3 className="text-2xl font-bold text-gray-900">Related Products</h3>
-          <p className="text-gray-600">Discover more amazing items</p>
+          <h3 className="text-xl md:text-2xl font-bold text-gray-900">Related Products</h3>
+          <p className="text-sm md:text-base text-gray-600">Discover more amazing items</p>
         </div>
-        <div className="flex space-x-2">
-          <button className="swiper-button-prev-custom w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center border border-gray-200 hover:border-violet-300 hover:bg-violet-50">
-            <ArrowBackIcon className="w-5 h-5 text-gray-600" />
+        <div className="hidden sm:flex space-x-2">
+          <button className="swiper-button-prev-custom w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center border border-gray-200 hover:border-violet-300 hover:bg-violet-50">
+            <ArrowBackIcon className="w-4 h-4 md:w-5 md:h-5 text-gray-600" />
           </button>
-          <button className="swiper-button-next-custom w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center border border-gray-200 hover:border-violet-300 hover:bg-violet-50">
-            <ArrowForwardIcon className="w-5 h-5 text-gray-600" />
+          <button className="swiper-button-next-custom w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center border border-gray-200 hover:border-violet-300 hover:bg-violet-50">
+            <ArrowForwardIcon className="w-4 h-4 md:w-5 md:h-5 text-gray-600" />
           </button>
         </div>
       </div>
 
-      <Swiper
-        pagination={false}
-        navigation={{
-          nextEl: '.swiper-button-next-custom',
-          prevEl: '.swiper-button-prev-custom',
-        }} 
-        modules={[Autoplay, Navigation, Pagination]}
-        spaceBetween={20}
-        slidesPerView={'auto'}
-        // autoplay={{
-        //   delay: 3000,
-        //   disableOnInteraction: false,
-        // }}
-        loop={true}
-        className="!overflow-visible"
-        breakpoints={{
-          1: {
-            slidesPerView: 1.2,
-            spaceBetween: 16,
-          },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 24,
-          },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 24,
-          },
-        }}
-      >
+      <div className="w-full overflow-hidden">
+        <Swiper
+          pagination={false}
+          navigation={{
+            nextEl: '.swiper-button-next-custom',
+            prevEl: '.swiper-button-prev-custom',
+          }} 
+          modules={[Autoplay, Navigation, Pagination]}
+          spaceBetween={16}
+          slidesPerView={1.2}
+          // autoplay={{
+          //   delay: 3000,
+          //   disableOnInteraction: false,
+          // }}
+          loop={true}
+          className="!overflow-visible"
+          touchEventsTarget="container"
+          simulateTouch={true}
+          allowTouchMove={true}
+          touchStartPreventDefault={false}
+          touchMoveStopPropagation={true}
+          preventClicks={false}
+          preventClicksPropagation={false}
+          breakpoints={{
+            320: {
+              slidesPerView: 1.2,
+              spaceBetween: 12,
+            },
+            480: {
+              slidesPerView: 1.5,
+              spaceBetween: 16,
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 2.5,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 24,
+            },
+            1280: {
+              slidesPerView: 4,
+              spaceBetween: 24,
+            },
+          }}
+        >
       {productData && productData.length > 0 && productData.map((item, index) => {
         const { url, name, price, sku, brand, product_id } = item
         if (category === item.category) {
@@ -133,16 +149,16 @@ const ProductSlider = ({productData, category}:Iprops) => {
                 </div>
 
                 {/* Product Info */}
-                <div className="p-4 space-y-3">
+                <div className="p-3 md:p-4 space-y-2 md:space-y-3">
                   <Link href={`/products/${product_id}`}>
                     <div>
                       {/* Brand */}
-                      <p className="text-sm text-gray-500 font-medium uppercase tracking-wide">
+                      <p className="text-xs md:text-sm text-gray-500 font-medium uppercase tracking-wide">
                         {brand}
                       </p>
                       
                       {/* Product Name */}
-                      <h3 className="text-lg font-bold text-gray-900 leading-tight line-clamp-2 group-hover:text-violet-600 transition-colors duration-200">
+                      <h3 className="text-sm md:text-lg font-bold text-gray-900 leading-tight line-clamp-2 group-hover:text-violet-600 transition-colors duration-200">
                         {name}
                       </h3>
                     </div>
@@ -152,20 +168,20 @@ const ProductSlider = ({productData, category}:Iprops) => {
                   <div className="flex items-center space-x-1">
                     <div className="flex text-yellow-400">
                       {[...Array(5)].map((_, i) => (
-                        <StarIcon key={i} className="w-4 h-4" />
+                        <StarIcon key={i} className="w-3 h-3 md:w-4 md:h-4" />
                       ))}
                     </div>
-                    <span className="text-sm text-gray-500">(4.5)</span>
+                    <span className="text-xs md:text-sm text-gray-500">(4.5)</span>
                   </div>
 
                   {/* Price */}
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
-                      <div className="flex items-center space-x-2">
-                        <span className="text-xl font-bold text-gray-900">
+                      <div className="flex items-center space-x-1 md:space-x-2">
+                        <span className="text-lg md:text-xl font-bold text-gray-900">
                           Rs.{price}
                         </span>
-                        <span className="text-sm text-gray-400 line-through">
+                        <span className="text-xs md:text-sm text-gray-400 line-through">
                           Rs.{Math.round(Number(price) * 1.33)}
                         </span>
                       </div>
@@ -175,7 +191,7 @@ const ProductSlider = ({productData, category}:Iprops) => {
                     </div>
                     
                     {/* Sizes Available */}
-                    <div className="flex space-x-1">
+                    <div className="hidden md:flex space-x-1">
                       {sku?.slice(0, 3).map((size: string, idx: number) => (
                         <span 
                           key={idx}
@@ -193,6 +209,7 @@ const ProductSlider = ({productData, category}:Iprops) => {
         }
       })}
     </Swiper>
+      </div>
     </div>
   );
 };
