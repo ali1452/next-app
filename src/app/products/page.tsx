@@ -1,9 +1,16 @@
-import React from 'react'
+import ProductsLayout from '@/container/productLayout'
+import { getAllProducts } from '@/services/userservices'
 
-const Products = () => {
+export default async function Products() {
+  let data = []
+  const resp = await getAllProducts()
+  if(resp?.status ==200){
+    data = resp.data
+  }
+
   return (
-    <div>Products</div>
+   <>
+   <ProductsLayout productData ={data} />
+   </>
   )
 }
-
-export default Products

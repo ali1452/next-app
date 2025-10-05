@@ -1,11 +1,10 @@
 import React from 'react'
-import style from './loader.module.scss'
 
 type Props = {}
 
 function Loader({}: Props) {
   return (
-    <div className={style.loader_container}>
+    <div className="w-full bg-black flex items-center justify-center h-screen z-[99]">
         <img src="/loaderImg.gif" alt="loading" />
     </div>
   )

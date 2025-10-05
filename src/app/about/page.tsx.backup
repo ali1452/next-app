@@ -1,0 +1,232 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'About | M&B Fashion',
+  description: 'Learn about M&B Fashion — who we are, what we stand for, and how we serve our customers.',
+}      </section>
+    </div>
+  )
+}efault function AboutPage() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-violet-50">
+      {/* Hero Section */}
+      <section className="pt-20 pb-16 bg-gradient-to-r from-violet-600/10 to-purple-600/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent mb-6">About M&B Fashion</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Your destination for contemporary style and everyday essentials. We curate versatile collections
+              that blend quality, comfort, and design — helping you look and feel your best.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { number: "50K+", label: "Happy Customers" },
+              { number: "1000+", label: "Products Available" },
+              { number: "99%", label: "Customer Satisfaction" },
+              { number: "24/7", label: "Customer Support" }
+            ].map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent mb-2">
+                  {stat.number}
+                </div>
+                <div className="text-gray-600 font-medium">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Story Section */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <h2 className="text-4xl font-bold text-gray-900">Our Story</h2>
+              <p className="text-gray-700 leading-8 text-lg">
+                Founded with a passion for effortless fashion, M&B began as a small idea: make great style simple and accessible.
+                Today, we partner with trusted suppliers and emerging designers to bring you pieces that last beyond seasons,
+                with thoughtful details and responsible sourcing where possible.
+              </p>
+              <p className="text-gray-700 leading-8 text-lg">
+                From our humble beginnings to becoming a trusted fashion destination, we've remained committed to our core values:
+                quality, affordability, and exceptional customer service.
+              </p>
+            </div>
+            <div className="relative">
+              <div className="bg-gradient-to-br from-violet-100 to-purple-100 rounded-3xl p-8 h-96 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-24 h-24 bg-gradient-to-r from-violet-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span className="text-4xl">❤️</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Made with Love</h3>
+                  <p className="text-gray-600">Every piece is carefully curated with passion and attention to detail</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose M&B Fashion?</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              We're committed to providing you with the best shopping experience and quality products
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { icon: "🚚", title: "Fast & Free Shipping", description: "Free shipping on orders over Rs.999 with express delivery options" },
+              { icon: "🔒", title: "Secure Shopping", description: "SSL encrypted checkout and secure payment processing" },
+              { icon: "💬", title: "24/7 Support", description: "Dedicated customer service team ready to help anytime" },
+              { icon: "🌱", title: "Sustainable Fashion", description: "Ethically sourced materials and responsible manufacturing" }
+            ].map((feature, index) => (
+              <div key={index} className="text-center group">
+                <div className="w-16 h-16 bg-gradient-to-r from-violet-100 to-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-violet-600 group-hover:to-purple-600 transition-all duration-300">
+                  <span className="text-3xl group-hover:scale-110 transition-transform duration-300">
+                    {feature.icon}
+                  </span>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What We Offer Section */}
+      <section className="py-16 bg-gradient-to-r from-violet-50 to-purple-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">What We Offer</h2>
+            <p className="text-xl text-gray-600">Discover our comprehensive range of fashion solutions</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              "Curated collections for men and women, updated regularly",
+              "Quality materials and comfortable fits for daily wear",
+              "Transparent pricing and seasonal promotions",
+              "Fast shipping and easy returns for a smooth experience",
+              "Size guides and fit recommendations",
+              "Sustainable and ethically sourced products"
+            ].map((item, index) => (
+              <div key={index} className="flex items-start space-x-4 bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="flex-shrink-0">
+                  <span className="text-green-500 text-xl">✓</span>
+                </div>
+                <p className="text-gray-700 font-medium">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Values Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Values</h2>
+            <p className="text-xl text-gray-600">The principles that guide everything we do</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { icon: "⭐", title: "Quality First", description: "We source only the finest materials and work with trusted manufacturers to ensure every piece meets our high standards." },
+              { icon: "👥", title: "Customer Focused", description: "Your satisfaction is our priority. We listen to feedback and continuously improve our products and services." },
+              { icon: "❤️", title: "Passionate Team", description: "Our team of fashion enthusiasts is dedicated to bringing you the latest trends and timeless classics." }
+            ].map((value, index) => (
+              <div key={index} className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div className="w-12 h-12 bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl flex items-center justify-center mb-6">
+                  <span className="text-white text-xl">
+                    {value.icon}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">{value.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{value.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Promise Section */}
+      <section className="py-16 bg-gradient-to-r from-violet-600 to-purple-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-bold text-white mb-6">Our Promise to You</h2>
+          <p className="text-xl text-violet-100 max-w-4xl mx-auto leading-relaxed mb-8">
+            We stand behind every item we offer. If something isn't right, our support team is here to help. 
+            We're committed to continuous improvement — listening to your feedback, refining our fits, 
+            and expanding our range to serve you better.
+          </p>
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold text-white mb-4">100% Satisfaction Guarantee</h3>
+            <p className="text-violet-100">
+              Not happy with your purchase? We offer easy returns and exchanges within 30 days, 
+              no questions asked.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-bold text-gray-900 mb-6">Ready to Explore?</h2>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Discover our latest collections and find your perfect style today
+          </p>
+          <button className="bg-gradient-to-r from-violet-600 to-purple-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-violet-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl">
+            Shop Now
+          </button>
+        </div>
+      </section>
+    </div>
+      <section className="space-y-6">
+        <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent mb-6">About M&B Fashion</h1>
+        <p className="text-gray-700 leading-7">
+          M&B Fashion is your destination for contemporary style and everyday essentials. We curate versatile collections
+          that blend quality, comfort, and design — helping you look and feel your best, from workdays to weekends.
+        </p>
+      </section>
+
+      <section className="mt-10 space-y-4">
+        <h2 className="text-2xl font-semibold">Our Story</h2>
+        <p className="text-gray-700 leading-7">
+          Founded with a passion for effortless fashion, M&B began as a small idea: make great style simple and accessible.
+          Today, we partner with trusted suppliers and emerging designers to bring you pieces that last beyond seasons,
+          with thoughtful details and responsible sourcing where possible.
+        </p>
+      </section>
+
+      <section className="mt-10 space-y-4">
+        <h2 className="text-2xl font-semibold">What We Offer</h2>
+        <ul className="list-disc list-inside space-y-2 text-gray-700">
+          <li>Curated collections for men and women, updated regularly</li>
+          <li>Quality materials and comfortable fits for daily wear</li>
+          <li>Transparent pricing and seasonal promotions</li>
+          <li>Fast shipping and easy returns for a smooth experience</li>
+        </ul>
+      </section>
+
+      <section className="mt-10 space-y-4">
+        <h2 className="text-2xl font-semibold">Our Promise</h2>
+        <p className="text-gray-700 leading-7">
+          We stand behind every item we offer. If something isn’t right, our support team is here to help. We’re committed
+          to continuous improvement — listening to your feedback, refining our fits, and expanding our range to serve you better.
+        </p>
+      </section>
+    </main>
+  )
+}
