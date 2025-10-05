@@ -20,4 +20,8 @@ const nextConfig = {
     },
 }
 
+module.exports = {
+    output: 'standalone'
+   }
+
 module.exports = nextConfig
