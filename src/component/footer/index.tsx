@@ -19,7 +19,7 @@ const Footer = () => {
           <div className="space-y-6">
             <div>
               <h3 className="text-3xl font-bold bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                FashionHub
+                M&B Fashion
               </h3>
               <p className="text-gray-300 leading-relaxed">
                 Your trusted destination for premium fashion. Discover the latest trends and timeless classics that define your unique style.

@@ -126,13 +126,13 @@ const validateField=(e: React.FocusEvent<HTMLInputElement, Element> | React.Focu
       setErr({...err, area_err:false})
     }
   }
-  if(e.target.name == 'zip_code'){
-    if(e.target.value == "" ||  e.target.value.length !== 4){
-      setErr({...err, zip_err:true})
-    }else{
-      setErr({...err, zip_err:false})
-    }
-  }
+  // if(e.target.name == 'zip_code'){
+  //   if(e.target.value == "" ||  e.target.value.length !== 4){
+  //     setErr({...err, zip_err:true})
+  //   }else{
+  //     setErr({...err, zip_err:false})
+  //   }
+  // }
   if(e.target.name == 'mobile_num'){
     if(e.target.value == "" || e.target.value.length !== 11){
       setErr({...err, mobile_num_err:true})
@@ -176,7 +176,7 @@ const placeOrder =()=>{
         <>
           {/* Header */}
           <div className="pt-24 md:pt-20 pb-8 bg-gradient-to-r from-violet-600/10 to-purple-600/10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:mt-5">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center">
                 <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent mb-4">
                   Secure Checkout
@@ -384,7 +384,7 @@ const placeOrder =()=>{
                         />
                         {err.zip_err && (
                           <p className="text-red-500 text-sm mt-2 bg-red-50 p-2 rounded-lg">
-                            ZIP code should be 5 digits
+                            ZIP code required*
                           </p>
                         )}
                       </div>

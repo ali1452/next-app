@@ -108,7 +108,7 @@ const HomeLayout = (props: Props) => {
   }, [heroSlides.length])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-violet-50 mt-5">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-violet-50">
       
       {/* Hero Section with Carousel */}
       <section className="relative pt-24 md:pt-20 pb-16 overflow-hidden">

@@ -165,7 +165,7 @@ const CartComp = (props: Props) => {
         <>
           {/* Hero Section */}
           <div className="pt-24 md:pt-20 pb-8 bg-gradient-to-r from-violet-600/10 to-purple-600/10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-5">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center">
                 <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent mb-4">
                   Shopping Cart

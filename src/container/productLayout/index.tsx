@@ -39,7 +39,7 @@ const ProductsLayout = ({productData}:IProps) => {
       {/* Hero Section */}
       <div className="relative pt-24 md:pt-20 pb-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-violet-600/10 to-purple-600/10"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sx:mt-5">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent mb-4">
               Fashion Collection
@@ -96,7 +96,7 @@ const ProductsLayout = ({productData}:IProps) => {
                         <div className="absolute top-4 right-4 space-y-2">
                           <button
                             onClick={() => toggleFavorite(product_id)}
-                            className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all duration-200 shadow-lg"
+                            className="w-10 h-10 mb-1 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all duration-200 shadow-lg"
                           >
                             {isFavorite ? (
                               <FavoriteIcon className="w-5 h-5 text-red-500" />
