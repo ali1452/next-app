@@ -1,5 +1,4 @@
 'use client'
-import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
@@ -14,7 +13,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import DeleteModal from './deleteModal/deleteModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCart, deleteAllCart,cartItemAdded, addItemQty } from '@/redux/slice/cartSlice';
+import { cartItemAdded } from '@/redux/slice/cartSlice';
 import Loader from '@/component/loader/loader';
 
 

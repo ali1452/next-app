@@ -1,24 +1,11 @@
 import axios from "axios"
 import Gconfig  from "@/globalConfig"
 
-const bast_url = Gconfig.api_url
+const base_url = Gconfig.api_url
 
-// const fetchAllUsers =async()=>{
-//     const users = await axios.get(url)
-//     return users
-// }
-
-// const createUser = async(data:any)=>{
-//     const newUser = await axios.post(url,data)
-//     return newUser
-// }
-
-// const deleteUser = async(id:string)=>{
-//     await axios.delete(`${url}${id}`)
-// }
 const getAllProducts = async()=>{
     try {
-        const products = await axios.get(`${bast_url}/products`)
+        const products = await axios.get(`${base_url}/products`)
         return products    
     } catch (error) {
         console.log(error)
@@ -28,7 +15,7 @@ const getAllProducts = async()=>{
 
 const getProduct = async(id:any)=>{
     try {
-        const product = await axios.get(`${bast_url}/products/${id}`)
+        const product = await axios.get(`${base_url}/products/${id}`)
         return product
         
     } catch (error) {
@@ -37,5 +24,20 @@ const getProduct = async(id:any)=>{
     
 }
 
+const postOrder = async (orderData:any) => {
+    try {
+        const res = await axios.post(`${base_url}/orders`, orderData, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        return res.data    
+    } catch (error) {
+        console.error('Error posting order:', error)
+        throw error
+    }
+}
 
-export { getAllProducts,getProduct }
+
+
+export { getAllProducts,getProduct,postOrder }

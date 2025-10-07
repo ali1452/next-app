@@ -14,11 +14,13 @@ import LockIcon from '@mui/icons-material/Lock';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAllCart } from '@/redux/slice/cartSlice';
 import { useRouter } from 'next/navigation';
+import { postOrder } from '@/services/userservices';
 
 const CheckoutLayout = () => {
 
   const [defaultAddress, setDefaultAddress]  = useState(true)
   const [isPayment, setIspayment] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [customerInfo, setCustomerInfo] = useState({
     email:'',
     first_name:'',
@@ -142,7 +144,8 @@ const validateField=(e: React.FocusEvent<HTMLInputElement, Element> | React.Focu
   }
 }
 
-const placeOrder =()=>{
+const placeOrder =async()=>{
+  setIsLoading(true)
   let checkErr = true
   let emptyStr = true
   Object.values(err).map((item)=>{
@@ -157,15 +160,57 @@ const placeOrder =()=>{
     }
   })
   if(checkErr && emptyStr){
-    console.log('submitted form sucessfully')
-    dispatch(deleteAllCart())
-    setSuccessMsg(true)
-    setTimeout(()=>{
-    router.push('/')
-    },2000)
+    const postData= {
+      first_name: customerInfo.first_name,
+      last_name: customerInfo.last_name,
+      email: customerInfo.email,
+      shopping_address: {
+        street_address: customerInfo.shippingAddress,
+        country: customerInfo.country,
+        province: customerInfo.province,
+        city: customerInfo.city,
+        area: customerInfo.area,
+        zip_code: customerInfo.zip_code
+      },
+      mobile_number: customerInfo.mobile_num,
+      mode_of_payment: 'cash',
+      amount: cartTotal(),
+      items: cartData.map((item:any)=>{
+        return {
+          product_id: item.product_id,
+          name: item.name,
+          quantity: item.qty,
+          price: item.price,
+          shipping_amount: 200
+        }
+      }) 
+      // [
+      //   {
+      //     "product_id": 124,
+      //     "name": "Black Basic Tee MN-TS-BS-WS23-003",
+      //     "quantity": 1,
+      //     "price": 1350,
+      //     "shipping_amount": 200
+      //   }
+      // ]
+    }
+    const resp = await postOrder(postData)
+    if(resp.success){
+      dispatch(deleteAllCart())
+      setSuccessMsg(true)
+      setIsLoading(false)
+      setTimeout(()=>{
+      router.push('/')
+      },2000)
+    }else{
+      setOrderErr(true)
+      setIsLoading(false)
+    }
+    
     
   }else{
     setOrderErr(true)
+    setIsLoading(false)
   }
  
 }
@@ -596,6 +641,7 @@ const placeOrder =()=>{
 
                   {/* Place Order Button */}
                   <button
+                    disabled={isLoading}
                     onClick={() => placeOrder()}
                     className="w-full bg-gradient-to-r from-violet-600 to-purple-600 text-white py-4 rounded-xl font-bold text-lg hover:from-violet-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl mt-6"
                   >
