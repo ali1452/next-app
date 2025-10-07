@@ -113,7 +113,7 @@ const ProductSlider = ({productData, category}:Iprops) => {
                       alt={name}
                       width={300}
                       height={300}
-                      className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700"
                       style={{ objectFit: 'cover' }}
                     />
                   </Link>

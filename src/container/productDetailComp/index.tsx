@@ -214,7 +214,7 @@ setError('')
                         <img 
                           src={`https://res.cloudinary.com/dpnza2tuy/image/upload/v1717048876/${data.url}`} 
                           alt={`${data.name} view ${index}`}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-contain"
                         />
                       </div>
                     ))}

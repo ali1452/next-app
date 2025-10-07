@@ -85,7 +85,7 @@ const ProductsLayout = ({productData}:IProps) => {
                         <img 
                           src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${url}`} 
                           alt={name}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
                         />
                       </Link>
                       
