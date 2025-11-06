@@ -24,6 +24,15 @@ const getProduct = async(id:any)=>{
     
 }
 
+const getAllOrders = async () => {
+    try {
+        const res = await axios.get(`${base_url}/orders`)
+        return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const postOrder = async (orderData:any) => {
     try {
         const res = await axios.post(`${base_url}/orders`, orderData, {
@@ -40,4 +49,4 @@ const postOrder = async (orderData:any) => {
 
 
 
-export { getAllProducts,getProduct,postOrder }
+export { getAllProducts,getProduct,getAllOrders,postOrder }

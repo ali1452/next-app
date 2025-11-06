@@ -18,7 +18,6 @@ const Header = () => {
   const count = useSelector((item: any) => item.cart.cart)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const selector = useSelector(state => state)
-  console.log('selector', selector)
 
   // Handle scroll effect
   useEffect(() => {
