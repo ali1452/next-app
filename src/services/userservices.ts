@@ -49,4 +49,46 @@ const postOrder = async (orderData:any) => {
 
 
 
-export { getAllProducts,getProduct,getAllOrders,postOrder }
+type SignupPayload = {
+    first_name: string
+    last_name: string
+    email: string
+    password: string
+}
+
+const signupUser = async (payload: SignupPayload) => {
+    try {
+        const res = await axios.post(`${base_url}/user`, payload, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        return res.data
+    } catch (error) {
+        console.error('Error signing up user:', error)
+        throw error
+    }
+}
+
+type LoginPayload = {
+    email: string
+    password: string
+}
+
+const loginUser = async (payload: LoginPayload) => {
+    try {
+        const res = await axios.post(`${base_url}/user/login`, payload, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        return res.data
+    } catch (error) {
+        console.error('Error logging in user:', error)
+        throw error
+    }
+}
+
+
+
+export { getAllProducts,getProduct,getAllOrders,postOrder,signupUser,loginUser }
