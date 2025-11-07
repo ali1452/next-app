@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import SearchBox from '../searcrch-box/search-box-index';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
+import { getAuthToken } from '@/utils/cookies-function';
 
 const Header = () => {
   const [loading, setLoading] = useState(true)
@@ -18,6 +19,7 @@ const Header = () => {
   const count = useSelector((item: any) => item.cart.cart)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const selector = useSelector(state => state)
+  const token = getAuthToken()
 
   // Handle scroll effect
   useEffect(() => {
@@ -118,20 +120,22 @@ const Header = () => {
               </div>
 
               {/* User Account - Desktop */}
+              <Link href='/login'>
               <div className="hidden md:block">
                 <button className="relative p-2 rounded-full hover:bg-white/10 transition-all duration-200 group">
                   <PersonIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
                   <div className="absolute inset-0 bg-gradient-to-r from-violet-400 to-purple-600 rounded-full blur opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                 </button>
               </div>
+              </Link>
 
               {/* Wishlist - Desktop */}
-              <div className="hidden md:block">
+              {token && <div className="hidden md:block">
                 <button className="relative p-2 rounded-full hover:bg-white/10 transition-all duration-200 group">
                   <FavoriteIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
                   <div className="absolute inset-0 bg-gradient-to-r from-violet-400 to-purple-600 rounded-full blur opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                 </button>
-              </div>
+              </div>}
 
               {/* Cart */}
               <Link href='/cart' className="group relative">
