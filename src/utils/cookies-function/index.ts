@@ -7,3 +7,7 @@ export const setAuthToken = (token: string) => {
 export const getAuthToken = (): string | undefined => {
   return Cookies.get('authToken')
 }
+
+export const IsAutenticated = (): boolean => {
+  return !!getAuthToken()
+}

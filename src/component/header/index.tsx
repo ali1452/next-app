@@ -131,10 +131,12 @@ const Header = () => {
 
               {/* Wishlist - Desktop */}
               {token && <div className="hidden md:block">
-                <button className="relative p-2 rounded-full hover:bg-white/10 transition-all duration-200 group">
-                  <FavoriteIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-violet-400 to-purple-600 rounded-full blur opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                </button>
+                <Link href={'/favourites'}>
+                  <button className="relative p-2 rounded-full hover:bg-white/10 transition-all duration-200 group">
+                    <FavoriteIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-violet-400 to-purple-600 rounded-full blur opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                  </button>
+                </Link>
               </div>}
 
               {/* Cart */}

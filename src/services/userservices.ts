@@ -89,6 +89,20 @@ const loginUser = async (payload: LoginPayload) => {
     }
 }
 
+const getFavoriteProducts = async (token: string) => {
+    try {
+        const res = await axios.get(`${base_url}/favorites`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+        return res.data
+    } catch (error) {
+        console.error('Error fetching favorite products:', error)
+        throw error
+    }
+}
 
 
-export { getAllProducts,getProduct,getAllOrders,postOrder,signupUser,loginUser }
+
+export { getAllProducts,getProduct,getAllOrders,postOrder,signupUser,loginUser,getFavoriteProducts }
