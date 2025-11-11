@@ -184,15 +184,6 @@ const placeOrder =async()=>{
           shipping_amount: 200
         }
       }) 
-      // [
-      //   {
-      //     "product_id": 124,
-      //     "name": "Black Basic Tee MN-TS-BS-WS23-003",
-      //     "quantity": 1,
-      //     "price": 1350,
-      //     "shipping_amount": 200
-      //   }
-      // ]
     }
     const resp = await postOrder(postData)
     if(resp.success){
