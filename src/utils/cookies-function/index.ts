@@ -11,3 +11,11 @@ export const getAuthToken = (): string | undefined => {
 export const IsAutenticated = (): boolean => {
   return !!getAuthToken()
 }
+
+export const setUserId = (userId: string) => {
+  Cookies.set('userId', userId, { expires: 7, secure: window.location.protocol === 'https:' })
+}
+
+export const getUserId = (): string | undefined => {
+  return Cookies.get('userId')
+}

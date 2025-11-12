@@ -6,7 +6,7 @@ import { loginUser } from '@/services/userservices'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import Cookies from 'js-cookie'
-import { setAuthToken } from '@/utils/cookies-function'
+import { setAuthToken, setUserId } from '@/utils/cookies-function'
 
 type LoginFormState = {
   email: string
@@ -66,9 +66,11 @@ const LoginPage = () => {
         password: formState.password,
       })
 
+
       if (response && typeof window !== 'undefined') {
         if (response.success) {
             setAuthToken(response.data.token as string)
+            setUserId(response.data._id as string)
         }
       }
 

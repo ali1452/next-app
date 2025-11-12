@@ -103,6 +103,34 @@ const getFavoriteProducts = async (token: string) => {
     }
 }
 
+type ToggleFavouritePayload = {
+    "_id": string,
+    "user": string,
+    "product_id": string,
+    "name": string,
+    "price": string,
+    "description": string,
+    "isFavourite": boolean
+}
+
+const toggledFavouirte = async (payload: ToggleFavouritePayload, token?: string) => {
+    try {
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        }
+
+        if (token) {
+            headers.Authorization = `Bearer ${token}`
+        }
+
+        const res = await axios.post(`${base_url}/favorites`, payload, { headers })
+        return res.data
+    } catch (error) {
+        console.error('Error toggling favourite product:', error)
+        throw error
+    }
+}
 
 
-export { getAllProducts,getProduct,getAllOrders,postOrder,signupUser,loginUser,getFavoriteProducts }
+
+export { getAllProducts,getProduct,getAllOrders,postOrder,signupUser,loginUser,getFavoriteProducts,toggledFavouirte }
