@@ -124,14 +124,12 @@ const AddRemoveFavourite= async()=>{
     return
   }
 
+  
   const userId = getUserId()
   const post_data = {
     _id: data._id,
     user: userId!, 
     product_id: data.product_id, 
-    name: data.name, 
-    price: data.price,
-    description:data.description, 
     isFavourite: !isFavorite
   }
   const res = await toggledFavouirte(post_data,token )

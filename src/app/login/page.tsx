@@ -70,7 +70,7 @@ const LoginPage = () => {
       if (response && typeof window !== 'undefined') {
         if (response.success) {
             setAuthToken(response.data.token as string)
-            setUserId(response.data._id as string)
+            setUserId(response.data.user._id as string)
         }
       }
 

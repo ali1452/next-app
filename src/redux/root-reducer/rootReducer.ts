@@ -3,7 +3,6 @@ import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 
 // slices
 import mainSlice from '../slice/mainSlice';
-// import cartSlice from '../slice/cartSlice';
 
 // ----------------------------------------------------------------------
 
@@ -36,10 +35,11 @@ export const productPersistConfig = {
   keyPrefix: 'redux-',
   whitelist: ['sortBy', 'checkout'],
 };
-const { cartSlice, productSlice } = mainSlice
+const { cartSlice, productSlice, favouriteSlice } = mainSlice
 const rootReducer = combineReducers({
-   cart: cartSlice,
-   product: productSlice
+  cart: cartSlice,
+  product: productSlice,
+  favourite: favouriteSlice
 });
 
 export default rootReducer;
