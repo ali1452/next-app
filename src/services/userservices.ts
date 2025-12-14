@@ -3,9 +3,16 @@ import Gconfig  from "@/globalConfig"
 
 const base_url = Gconfig.api_url
 
-const getAllProducts = async()=>{
+const getAllProducts = async (token?: string | null)=>{
     try {
-        const products = await axios.get(`${base_url}/products`)
+        const headers: Record<string, string> = {}
+
+        if (token) {
+            headers.Authorization = `Bearer ${token}`
+        }
+
+        const products = await axios.get(`${base_url}/products`, { headers })
+        console.log('Products fetched:', products)
         return products    
     } catch (error) {
         console.log(error)
@@ -103,6 +110,34 @@ const getFavoriteProducts = async (token: string) => {
     }
 }
 
+type ToggleFavouritePayload = {
+    "_id": string,
+    "user": string,
+    "product_id": string,
+    "isFavourite": boolean
+}
+
+const toggledFavouirte = async (payload: ToggleFavouritePayload, token?: string) => {
+    try {
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        }
+
+        if (token) {
+            headers.Authorization = `Bearer ${token}`
+            const res = await axios.post(`${base_url}/favorites`, payload, { headers })
+            return res.data
+        }
+
+        throw new Error('Authentication token is required to toggle favourite product.')
+
+        
+    } catch (error) {
+        console.error('Error toggling favourite product:', error)
+        throw error
+    }
+}
 
 
-export { getAllProducts,getProduct,getAllOrders,postOrder,signupUser,loginUser,getFavoriteProducts }
+
+export { getAllProducts,getProduct,getAllOrders,postOrder,signupUser,loginUser,getFavoriteProducts,toggledFavouirte }

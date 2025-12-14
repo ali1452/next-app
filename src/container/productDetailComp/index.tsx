@@ -17,6 +17,8 @@ import VerifiedIcon from '@mui/icons-material/Verified'
 import FlashOnIcon from '@mui/icons-material/FlashOn'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import ZoomInIcon from '@mui/icons-material/ZoomIn'
+import { toggledFavouirte } from '@/services/userservices'
+import { getAuthToken, getUserId } from '@/utils/cookies-function'
 
 type Props = {
   data: any
@@ -41,6 +43,7 @@ const ProductDetail = ({data}: Props) => {
 
   const getProducts = () =>{
     setProductData(products)
+    
  }
 
   useEffect(()=>{
@@ -98,20 +101,42 @@ const add_Cart_item =(value:any)=>{
 }
 
 const shopNow =(value:any)=>{
-if(selectedSize == ""){
-  setError('Please Select Size First.')
-}else{
-  setLoading(true)
-  add_Cart_item(value)
-  router.push('/checkout')
-  
-}
+  if(selectedSize == ""){
+    setError('Please Select Size First.')
+  }else{
+    setLoading(true)
+    add_Cart_item(value)
+    router.push('/checkout')
+    
+  }
 
 }
 
 const selectOption=(e: any)=>{
 setSelectedSize(e.target.value)
 setError('')
+}
+
+const AddRemoveFavourite= async()=>{
+  const token = getAuthToken()
+  if(!token){
+    router.push('/login')
+    return
+  }
+
+  
+  const userId = getUserId()
+  const post_data = {
+    _id: data._id,
+    user: userId!, 
+    product_id: data.product_id, 
+    isFavourite: !isFavorite
+  }
+  const res = await toggledFavouirte(post_data,token )
+  if(res.success){
+    setIsFavorite(!isFavorite)
+  }
+ 
 }
 
   return (
@@ -177,13 +202,13 @@ setError('')
                           <ZoomInIcon className="w-6 h-6 text-gray-700" />
                         </button>
                         <button 
-                          onClick={toggleFavorite}
+                          // onClick={toggleFavorite}
                           className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all duration-200 shadow-lg"
                         >
                           {isFavorite ? (
-                            <FavoriteIcon className="w-6 h-6 text-red-500" />
+                            <FavoriteIcon className="w-6 h-6 text-red-500" onClick={()=>AddRemoveFavourite()} />
                           ) : (
-                            <FavoriteBorderIcon className="w-6 h-6 text-gray-700" />
+                            <FavoriteBorderIcon className="w-6 h-6 text-gray-700" onClick={()=>AddRemoveFavourite()}  />
                           )}
                         </button>
                         <button className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all duration-200 shadow-lg">

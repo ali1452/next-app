@@ -19,7 +19,7 @@ const IMAGE_URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL
 
 if(Environment == 'development'){
      Gconfig = {
-        api_url:API_URL|| '',
+        api_url:"http://localhost:5000",
         image_url:IMAGE_URL|| '',
         environment:Environment
     }

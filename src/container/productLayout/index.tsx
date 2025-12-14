@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import PaginatedItems from '@/component/pagination/paginaton'
 import { useAppDispatch } from '@/redux/hook/hook'
@@ -9,18 +9,22 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import StarIcon from '@mui/icons-material/Star'
+import { getAllProducts } from '@/services/userservices'
+import { getAuthToken } from '@/utils/cookies-function'
 
-type IProps = {
-  productData:any[]
-}
+// type IProps = {
+//   productData:any[]
+// }
 
-const ProductsLayout = ({productData}:IProps) => {
+const ProductsLayout = () => {
+  const [productData, setProductData] = useState<any[]>([])
   const [selectedPage, setSelectedPage] = useState(1)
   const [favorites, setFavorites] = useState<string[]>([])
   const [hoveredProduct, setHoveredProduct] = useState<string | null>(null)
   const dispatch = useAppDispatch()
 
   const toggleFavorite = (productId: string) => {
+    console.log('Toggling favorite for product:', productId)
     setFavorites(prev => 
       prev.includes(productId) 
         ? prev.filter(id => id !== productId)
@@ -28,11 +32,32 @@ const ProductsLayout = ({productData}:IProps) => {
     )
   }
 
+  const fetchProducts = async () => {
+    const token = getAuthToken() || null
+    try {
+      const response = await getAllProducts(token)
+      if(response?.status ==200){
+          const products = response?.data
+          setProductData(Array.isArray(products) ? products : [])
+          dispatch(addproduct(productData))
+      }else{
+          setProductData([])
+          dispatch(addproduct([]))
+      }
+    } catch (err) {
+      console.error('Failed to load products', err)
+      setProductData([])
+      dispatch(addproduct([]))
+    }
+  }
+
+
   useEffect(()=>{
-    dispatch(addproduct(productData))
+    fetchProducts()
   },[])
 
-  const currentProducts = productData.slice((selectedPage-1)*10,selectedPage*10)
+  const currentProducts = useMemo(()=> productData.slice((selectedPage-1)*10,selectedPage*10),[productData,selectedPage])
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-violet-50">
@@ -98,7 +123,7 @@ const ProductsLayout = ({productData}:IProps) => {
                             onClick={() => toggleFavorite(product_id)}
                             className="w-10 h-10 mb-1 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all duration-200 shadow-lg"
                           >
-                            {isFavorite ? (
+                            {item.favourite ? (
                               <FavoriteIcon className="w-5 h-5 text-red-500" />
                             ) : (
                               <FavoriteBorderIcon className="w-5 h-5 text-gray-600" />
@@ -112,12 +137,12 @@ const ProductsLayout = ({productData}:IProps) => {
                         </div>
                         
                         {/* Quick Add to Cart */}
-                        <div className="absolute bottom-4 left-4 right-4">
+                        {/* <div className="absolute bottom-4 left-4 right-4">
                           <button className="w-full bg-white/90 backdrop-blur-sm text-gray-800 py-3 rounded-xl font-medium hover:bg-white transition-all duration-200 shadow-lg flex items-center justify-center space-x-2">
                             <ShoppingCartIcon className="w-5 h-5" />
                             <span>Quick Add</span>
                           </button>
-                        </div>
+                        </div> */}
                       </div>
                       
                       {/* Sale Badge */}
