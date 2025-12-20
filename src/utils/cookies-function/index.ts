@@ -19,3 +19,8 @@ export const setUserId = (userId: string) => {
 export const getUserId = (): string | undefined => {
   return Cookies.get('userId')
 }
+
+export const logout = () => {
+  Cookies.remove('authToken')
+  Cookies.remove('userId')
+}

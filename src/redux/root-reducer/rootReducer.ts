@@ -35,11 +35,12 @@ export const productPersistConfig = {
   keyPrefix: 'redux-',
   whitelist: ['sortBy', 'checkout'],
 };
-const { cartSlice, productSlice, favouriteSlice } = mainSlice
+const { cartSlice, productSlice, favouriteSlice, userSlice } = mainSlice
 const rootReducer = combineReducers({
   cart: cartSlice,
   product: productSlice,
-  favourite: favouriteSlice
+  favourite: favouriteSlice,
+  user: userSlice,
 });
 
 export default rootReducer;

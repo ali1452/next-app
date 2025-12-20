@@ -65,7 +65,7 @@ type SignupPayload = {
 
 const signupUser = async (payload: SignupPayload) => {
     try {
-        const res = await axios.post(`${base_url}/user`, payload, {
+        const res = await axios.post(`${base_url}/users`, payload, {
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -84,7 +84,7 @@ type LoginPayload = {
 
 const loginUser = async (payload: LoginPayload) => {
     try {
-        const res = await axios.post(`${base_url}/user/login`, payload, {
+        const res = await axios.post(`${base_url}/users/login`, payload, {
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -106,6 +106,20 @@ const getFavoriteProducts = async (token: string) => {
         return res.data
     } catch (error) {
         console.error('Error fetching favorite products:', error)
+        throw error
+    }
+}
+
+const getUser = async (token: string,id:string) => {
+    try {
+        const res = await axios.get(`${base_url}/users/${id}`, {   
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+        return res.data
+    } catch (error) {
+        console.error('Error fetching user profile:', error)
         throw error
     }
 }
@@ -140,4 +154,4 @@ const toggledFavouirte = async (payload: ToggleFavouritePayload, token?: string)
 
 
 
-export { getAllProducts,getProduct,getAllOrders,postOrder,signupUser,loginUser,getFavoriteProducts,toggledFavouirte }
+export { getUser, getAllProducts,getProduct,getAllOrders,postOrder,signupUser,loginUser,getFavoriteProducts,toggledFavouirte }

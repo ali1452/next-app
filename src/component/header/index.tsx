@@ -10,16 +10,22 @@ import { useSelector } from 'react-redux';
 import SearchBox from '../searcrch-box/search-box-index';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
-import { getAuthToken } from '@/utils/cookies-function';
+import { IsAutenticated, logout } from '@/utils/cookies-function';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
   const [loading, setLoading] = useState(true)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
   const count = useSelector((item: any) => item.cart.cart)
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const selector = useSelector(state => state)
-  const token = getAuthToken()
+  const [userAnchorEl, setUserAnchorEl] = useState<HTMLElement | null>(null);
+  const router = useRouter()
+  const store = useSelector((state: any) => state)
+  const user = store.user
+
+  const authenticated = IsAutenticated()
 
   // Handle scroll effect
   useEffect(() => {
@@ -36,8 +42,25 @@ const Header = () => {
     setAnchorEl(null);
   };
 
+  const handleUserMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+    setUserAnchorEl(event.currentTarget);
+  };
+
+  const handleUserMenuClose = () => {
+    setUserAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    logout();
+    setUserAnchorEl(null);
+    router.push('/');
+    window.location.reload();
+  };
+
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+  const userMenuOpen = Boolean(userAnchorEl);
+  const userMenuId = userMenuOpen ? 'user-menu-popover' : undefined;
 
 
   let total_item = 0
@@ -120,20 +143,20 @@ const Header = () => {
               </div>
 
               {/* User Account - Desktop */}
-              <Link href='/login'>
+              {!authenticated && <Link href='/login'>
               <div className="hidden md:block">
                 <button className="relative p-2 rounded-full hover:bg-white/10 transition-all duration-200 group">
-                  <PersonIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
+                  <PersonIcon className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-200" />
                   <div className="absolute inset-0 bg-gradient-to-r from-violet-400 to-purple-600 rounded-full blur opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                 </button>
               </div>
-              </Link>
+              </Link>}
 
               {/* Wishlist - Desktop */}
-              {token && <div className="hidden md:block">
+              {<div className="hidden md:block">
                 <Link href={'/favourites'}>
                   <button className="relative p-2 rounded-full hover:bg-white/10 transition-all duration-200 group">
-                    <FavoriteIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
+                    <FavoriteIcon className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-200" />
                     <div className="absolute inset-0 bg-gradient-to-r from-violet-400 to-purple-600 rounded-full blur opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                   </button>
                 </Link>
@@ -142,7 +165,7 @@ const Header = () => {
               {/* Cart */}
               <Link href='/cart' className="group relative">
                 <div className="relative p-2 rounded-full hover:bg-white/10 transition-all duration-200" aria-describedby={id} >
-                  <ShoppingCartIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
+                  <ShoppingCartIcon className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-200" />
                   {total_item > 0 && (
                     <span className="absolute -top-1 -right-1 bg-gradient-to-r from-red-500 to-pink-600 text-white text-xs font-bold min-w-[22px] h-6 flex items-center justify-center rounded-full px-1 shadow-lg animate-bounce">
                       {total_item > 99 ? '99+' : total_item}
@@ -178,16 +201,53 @@ const Header = () => {
                   </div>
                 </Popover>
               </Link>
+              {authenticated && (
+                <>
+                  <p
+                    className='text-white cursor-pointer hover:text-gray-200 transition-colors duration-200'
+                    onMouseOver={handleUserMenuClick}
+                    aria-describedby={userMenuId}
+                  >
+                    Welcome, {user?.user?.first_name}
+                  </p>
+                  <Popover
+                    id={userMenuId}
+                    open={userMenuOpen}
+                    anchorEl={userAnchorEl}
+                    onClose={handleUserMenuClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'right',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    PaperProps={{
+                      className: "mt-2 shadow-2xl border border-gray-200 rounded-xl overflow-hidden"
+                    }}
+                  >
+                    <div className="p-4 bg-gradient-to-br from-white to-gray-50 min-w-[200px]">
+                      <button
+                        onClick={handleLogout}
+                        className="w-full bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-lg font-medium hover:from-red-600 hover:to-red-700 transition-all duration-200 flex items-center justify-center gap-2"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </Popover>
+                </>
+              )}
 
               {/* Mobile Menu Button */}
-              <button 
+              <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="lg:hidden p-2 rounded-full hover:bg-white/10 transition-all duration-200 group"
               >
                 {mobileMenuOpen ? (
-                  <CloseIcon className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" />
+                  <CloseIcon className="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300" />
                 ) : (
-                  <MenuIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
+                  <MenuIcon className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-200" />
                 )}
               </button>
             </div>
@@ -231,11 +291,11 @@ const Header = () => {
               {/* Mobile Actions */}
               <div className="flex items-center justify-around pt-4 border-t border-white/10">
                 <button className="flex flex-col items-center space-y-1 text-white/80 hover:text-white transition-colors duration-200">
-                  <PersonIcon className="w-6 h-6" />
+                  <PersonIcon className="w-6 h-6 text-white" />
                   <span className="text-xs">Account</span>
                 </button>
                 <button className="flex flex-col items-center space-y-1 text-white/80 hover:text-white transition-colors duration-200">
-                  <FavoriteIcon className="w-6 h-6" />
+                  <FavoriteIcon className="w-6 h-6 text-white" />
                   <span className="text-xs">Wishlist</span>
                 </button>
               </div>
