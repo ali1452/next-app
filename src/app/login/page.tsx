@@ -5,8 +5,9 @@ import { useRouter } from 'next/navigation'
 import { loginUser } from '@/services/userservices'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import Cookies from 'js-cookie'
 import { setAuthToken, setUserId } from '@/utils/cookies-function'
+import { useDispatch } from 'react-redux'
+import { setUser } from '@/redux/slice/userSlice'
 
 type LoginFormState = {
   email: string
@@ -25,6 +26,8 @@ const LoginPage = () => {
   const [serverError, setServerError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+
+  const dispatch = useDispatch()
 
   const isFormValid = useMemo(() => {
     return formState.email.trim().length > 0 && formState.password.trim().length > 0
@@ -71,6 +74,8 @@ const LoginPage = () => {
         if (response.success) {
             setAuthToken(response.data.token as string)
             setUserId(response.data.user._id as string)
+            dispatch(setUser(response.data.user))
+            
         }
       }
 

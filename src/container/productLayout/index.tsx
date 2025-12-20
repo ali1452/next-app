@@ -24,7 +24,6 @@ const ProductsLayout = () => {
   const dispatch = useAppDispatch()
 
   const toggleFavorite = (productId: string) => {
-    console.log('Toggling favorite for product:', productId)
     setFavorites(prev => 
       prev.includes(productId) 
         ? prev.filter(id => id !== productId)
